@@ -1,26 +1,229 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─── Phosphor Terminal: tokens ──────────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light — warm paper */
+  --bg: #f7f6f0;
+  --bg-soft: #efede4;
+  --fg: #0c0c0c;
+  --fg-soft: #2b2a26;
+  --muted: #6e6c63;
+  --border: #d8d5c8;
+  --hover: #ebe9de;
+  --accent: #4d7c0f;       /* lime-700 — readable on warm bg */
+  --accent-soft: #84cc1622; /* lime-500 @ 13% */
+  --live: #ca8a04;          /* amber-600 */
+
+  --grid-dot: #00000010;
+}
+
+.dark {
+  /* Dark — deep warm black, low-flicker */
+  --bg: #0d0d0c;
+  --bg-soft: #161614;
+  --fg: #ededeb;
+  --fg-soft: #cfcdc7;
+  --muted: #7a786e;
+  --border: #242220;
+  --hover: #1a1917;
+  --accent: #bef264;       /* lime-300 — phosphor */
+  --accent-soft: #bef26426; /* @ 15% */
+  --live: #fbbf24;          /* amber-400 */
+
+  --grid-dot: #ffffff10;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-fg: var(--fg);
+  --color-fg-soft: var(--fg-soft);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-hover: var(--hover);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-live: var(--live);
+
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-jetbrains-mono);
+  --font-serif: var(--font-instrument-serif);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base ───────────────────────────────────────────────── */
+
+html, body {
+  background: var(--bg);
+  color: var(--fg);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-feature-settings: "ss01", "cv01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  /* Faint dot grid texture, only as wallpaper */
+  background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-position: 0 0;
+  background-attachment: fixed;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Smooth theme transitions */
+html, html * {
+  transition: background-color 220ms ease, border-color 220ms ease, color 220ms ease;
+}
+
+/* ─── Custom utilities ───────────────────────────────────── */
+
+.font-serif-italic {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+/* Prose link — underline that grows from left on hover */
+.prose-link {
+  position: relative;
+  color: var(--fg);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.prose-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(0.35);
+  opacity: 0.5;
+  transition: transform 280ms cubic-bezier(.4,0,.2,1), opacity 200ms ease;
+}
+.prose-link:hover::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+/* Nav link — underline slides in from right on hover */
+.nav-link {
+  position: relative;
+  color: var(--muted);
+  transition: color 180ms ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -4px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 240ms cubic-bezier(.4,0,.2,1);
+}
+.nav-link:hover {
+  color: var(--fg);
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Small monospace pill badge */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  line-height: 1;
+  padding: 5px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--muted);
+  background: var(--bg-soft);
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+.pill:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* Pulse dot for "available" status */
+.pulse-dot {
+  position: relative;
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: var(--accent);
+  animation: pulse-out 1.8s ease-out infinite;
+  opacity: 0.5;
+}
+@keyframes pulse-out {
+  0%   { transform: scale(1);   opacity: 0.5; }
+  85%  { transform: scale(2.6); opacity: 0;   }
+  100% { transform: scale(2.6); opacity: 0;   }
+}
+
+/* Blinking caret */
+.caret {
+  display: inline-block;
+  width: 0.45em;
+  height: 1em;
+  vertical-align: -0.12em;
+  background: var(--accent);
+  margin-left: 2px;
+  animation: blink 1.05s steps(2, end) infinite;
+}
+@keyframes blink {
+  0%, 50%   { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+/* Section rule — long dashed line that extends to right edge */
+.section-rule {
+  flex: 1;
+  height: 1px;
+  background-image: linear-gradient(to right, var(--border) 50%, transparent 50%);
+  background-size: 8px 1px;
+}
+
+/* Animated bar fill for stats */
+.bar-fill {
+  transform-origin: left;
+  animation: bar-grow 900ms cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes bar-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Subtle reveal for cards on first paint */
+.reveal {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: reveal 600ms cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes reveal {
+  to { opacity: 1; transform: translateY(0); }
 }
