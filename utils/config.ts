@@ -5,21 +5,22 @@ export const config = {
   name: "Rahul Kumar",
   logo: "RK",
   title: "Software Engineer",
+  freelanceTagline: "Available for full-stack & low-level freelance work",
   location: "Chandigarh, India",
   resumePath: "/Resume.pdf",
 
   // ─── SEO / Metadata ───────────────────────────────────────
   seo: {
-    title: "Rahul Kumar — Software Engineer",
+    title: "Rahul Kumar · Software Engineer",
     description:
-      "Software engineer building production systems in TypeScript, Go, and Rust. Polished frontend components, reliable services, and high-performance data pipelines.",
+      "Software engineer shipping production systems in TypeScript, Go, and Rust. Polished frontend components in React/Next.js, reliable services, and high-performance data pipelines. Open to freelance work.",
   },
 
   // ─── Hero ──────────────────────────────────────────────────
   hero: {
     greeting: "Hi, I'm",
     subtitle:
-      "Software engineer shipping production systems in TypeScript, Go, and Rust. I build polished frontend components in React/Next.js, reliable services in Rust, and high-performance APIs and data pipelines — with a focus on caching, security, and low-latency query scaling.",
+      "Software engineer shipping production systems in TypeScript, Go, and Rust. I craft polished, accessible frontend components in React/Next.js, build reliable services in Rust, and engineer high-performance APIs and data pipelines end to end, with a focus on caching, security, and low-latency query scaling.",
   },
 
   // ─── Navigation ────────────────────────────────────────────
@@ -36,21 +37,21 @@ export const config = {
     status: "BCA Student",
     open_to_work: true,
     bio: [
-      "I'm a Software Engineer focused on building things end-to-end — from polished UI to the systems behind them.",
-      "Currently I work full-stack on the Enrich platform: shipping the frontend in Next.js, backend services in Go and Node, and data pipelines that handle hundreds of millions of records on ClickHouse.",
-      "Outside of work I write low-level systems for fun — most recently a Redis-compatible database engine in Go (RESP protocol, transactions, replication, persistence). I also grind DSA.",
+      "I'm a Software Engineer focused on building things end to end, from polished UI to the systems behind them.",
+      "Currently I work full-stack on the Enrich platform: shipping the frontend in Next.js, backend services in Go and Node, and ClickHouse-backed analytics over hundreds of millions of records. Comfortable writing raw SQL by hand when an ORM gets in the way.",
+      "Outside professional work I build DevSync, a collaborative low-latency cloud IDE, and write low-level systems for fun, like a Redis-compatible database engine in Go. I also solve DSA.",
     ],
   },
 
-  // ─── Tech Stack ────────────────────────────────────────────
+  // ─── Tech Stack (mirrors resume categories) ────────────────
   techStack: {
-    primary: [
-      "TypeScript", "JavaScript", "Go", "Rust", "Next.js", "React.js",
-      "Node.js", "Express", "Fastify", "Gin", "Fiber",
-      "PostgreSQL", "MongoDB", "ClickHouse", "Redis",
-      "WebSockets", "Docker", "Prisma", "Drizzle",
+    categories: [
+      { label: "Languages",  items: ["TypeScript", "JavaScript", "Go", "Rust", "SQL"] },
+      { label: "Frontend",   items: ["Next.js", "React.js", "Redux Toolkit", "Tailwind CSS", "Shadcn UI"] },
+      { label: "Backend",    items: ["Node.js", "Express.js", "Fastify", "Echo", "Fiber", "gRPC", "WebSockets", "REST APIs"] },
+      { label: "Databases",  items: ["PostgreSQL", "MongoDB", "ClickHouse", "Redis"] },
+      { label: "DevOps",     items: ["Docker", "GitHub Actions", "AWS (SES)", "Prisma", "Drizzle ORM", "BullMQ"] },
     ],
-    secondary: ["Python", "C", "C++", "Tailwind", "Shadcn", "gRPC", "BullMQ", "AWS SES", "GitHub Actions"],
   },
 
   coreExpertise: [
@@ -89,46 +90,37 @@ export const config = {
     title: "DevSync",
     year: "2025",
     liveUrl: "https://dev-sync-blush.vercel.app/",
-    category: "Real-Time Collaborative Developer Platform",
+    category: "Real-Time Collaborative Coding Platform",
     description:
       "DevSync is a real-time collaborative developer platform that enables teams to write code, execute commands, and collaborate live within a shared environment. It features synchronized editors, an integrated terminal for live execution, and WebSocket-driven state sharing to maintain real-time consistency across users. The platform is backed by a scalable Node.js architecture, supports isolated execution using containerized environments, and ensures persistent project state to enable reliable, multi-user collaboration across sessions.",
     imageUrl: "/DevSync-Main.png",
     isFeatured: true,
     githubRepo: "DevSync",
     highlights: [
-      "Up to 15 developers editing the same repository simultaneously",
-      "Real-time collaboration using Yjs CRDTs over WebSocket",
-      "Integrated terminal with live command execution",
-      "Headless terminal & GUI processes using Xvfb (X11)",
-      "Concurrent file editing with conflict handling",
-      "Dockerized environments for isolated execution & deployment",
+      "Built a Next.js collaborative coding platform supporting up to 15 developers editing the same repository simultaneously in real time via Yjs CRDTs over WebSocket, with low-latency cursor and selection sync.",
+      "Architected a distributed microservices system separating collaboration (WebSocket, CRDT sync, presence) from persistence and execution layers for horizontal scalability.",
+      "Developed a Dockerized execution backend with isolated disk storage, capable of running React, Express, and GUI apps (Tkinter), exposed securely via a reverse proxy.",
+      "Integrated a real-time chat system alongside the editor for seamless team communication during sessions.",
     ],
-    tags: [
-      "Next.js", "Express.js", "WebSockets", "Yjs", "Prisma", "Docker", "Xvfb",
-    ],
+    tags: ["Next.js", "Prisma", "Yjs", "Xvfb", "WebSocket", "Express", "Docker"],
   },
 
   SecondaryProject: {
     title: "Bookwise",
     year: "2025",
     liveUrl: "",
-    category: "Library Management & Access Control System",
+    category: "Enterprise Library Management System",
     description:
-      "BookWise is a full-stack library management system designed with real-world access control and automation.\nUsers can discover, borrow, and return books through a secure, approval-based flow.\nAdmins manage users and inventory with protected routes and fine-grained permissions.\nBackground workflows automate emails, reminders, and overdue handling reliably.",
+      "BookWise is a full-stack library management system designed with real-world access control and automation. Users can discover, borrow, and return books through a secure, approval-based flow. Admins manage users and inventory with protected routes and fine-grained permissions. Background workflows automate emails, reminders, and overdue handling reliably.",
     isFeatured: false,
     imageUrl: "/Library-Main.png",
     githubRepo: "Bookwise",
     highlights: [
-      "User authentication and session management using NextAuth",
-      "Admin-only routes with role-based access control",
-      "Book borrowing and request approval workflow",
-      "Redis-backed rate limiting to prevent abuse",
-      "Email notifications for request status updates",
-      "Background job processing using QStash",
+      "Implemented a protected admin dashboard for user approvals, inventory management, and borrowing workflows.",
+      "Integrated QStash background workflows with Nodemailer to automatically send overdue-book reminder emails.",
+      "Hardened the API surface with rate limiting and request throttling to mitigate abuse and DDoS risk.",
     ],
-    tags: [
-      "Next.js", "Drizzle ORM", "NextAuth", "Redis", "QStash", "NodeMailer",
-    ],
+    tags: ["Next.js", "Upstash", "Drizzle", "Redis", "Nodemailer"],
   },
 
   ThirdProject: {
@@ -138,21 +130,15 @@ export const config = {
     category: "Redis-Compatible In-Memory Database (from Scratch)",
     isFeatured: false,
     description:
-      "GoRedis is a Redis-compatible in-memory database engine built from scratch in Go. It implements the RESP wire protocol, so the official redis-cli and existing client SDKs connect to it natively. Under the hood it ships strings with TTL, lists with blocking operations, streams with consumer groups, sorted sets via skip-lists, and geospatial indexing — together with MULTI/EXEC transactions backed by WATCH-based optimistic concurrency, master–replica replication, RDB snapshots, AOF write-ahead logging, Pub/Sub fan-out, and password-based authentication. The goal was to internalize how production databases are actually engineered.",
+      "GoRedis is a Redis-compatible in-memory database engine built from scratch in Go. It implements the RESP wire protocol so the official redis-cli and existing client SDKs connect natively, with sub-millisecond GET/SET latency on in-memory operations. Under the hood it ships strings with TTL, lists with blocking operations, streams with consumer groups, sorted sets via skip-lists, and geospatial indexing, together with MULTI/EXEC transactions backed by WATCH-based optimistic concurrency, master-replica replication, RDB snapshots, AOF write-ahead logging, Pub/Sub fan-out, and password-based authentication.",
     imageUrl: "/GoRedis-Main.png",
     githubRepo: "GoRedis",
     highlights: [
-      "RESP wire protocol — works with the official redis-cli and SDKs",
-      "Strings with TTL and lazy expiration",
-      "Lists with blocking operations (BLPOP)",
-      "Streams with consumer groups (Kafka-lite)",
-      "Sorted sets backed by skip-lists",
-      "MULTI / EXEC transactions with WATCH-based optimistic concurrency",
-      "Master–replica replication with command propagation",
-      "Durability via RDB snapshots and AOF write-ahead logging",
-      "Pub/Sub fan-out messaging and password-based auth",
+      "Built a Redis-compatible database engine in Go implementing the RESP wire protocol, so the official redis-cli and client SDKs connect natively, with sub-millisecond GET/SET latency on in-memory operations.",
+      "Implemented core data structures and commands: strings with TTL, lists with blocking ops (BLPOP), streams with consumer groups, sorted sets via skip-lists, and geospatial indexing.",
+      "Engineered MULTI/EXEC transactions with WATCH-based optimistic concurrency control, plus master-replica replication, RDB snapshots, AOF write-ahead logging, Pub/Sub, and auth.",
     ],
-    tags: ["Go", "TCP", "RESP", "Skip List", "Distributed Systems"],
+    tags: ["Go", "TCP", "RESP Protocol"],
   },
 
   // ─── Experience ────────────────────────────────────────────
@@ -160,18 +146,18 @@ export const config = {
     {
       role: "Full-Stack Software Engineer",
       company: "InboxKit",
-      location: "Remote — Gurgaon, India",
-      period: "Jan 2026 — Present",
+      location: "Remote",
+      period: "Jan 2026 → Present",
       description:
-        "Building scalable full-stack applications end-to-end for the Enrich platform.",
+        "Building scalable full-stack applications end to end for the Enrich platform.",
       highlights: [
-        "Owned the Enrich Platform end-to-end — frontend, backend, infra, and deployment.",
-        "Designed and built the customer-facing UI in Next.js, Tailwind, and Shadcn (dashboards, billing, analytics).",
+        "Owned the Enrich Platform end to end: designed and shipped the full product (frontend, backend, infra, deployment), including the REST API surface powering the customer dashboard and an internal admin dashboard for monitoring and abuse detection.",
+        "Designed and built the customer-facing UI in Next.js, Tailwind, and Shadcn: dashboards, billing, analytics, and a reusable component library with accessible, responsive layouts across breakpoints.",
         "Architected ClickHouse-backed analytics over 300M+ records, applying multi-tier Redis caching, query rewriting, and partitioning to keep dashboard queries at sub-second p95 latency.",
-        "Hardened platform security: rate limiting, RBAC, signed sessions, input validation, and audit logging.",
-        "Built microservices and automation pipelines (browser automation, transactional email, LinkedIn scraping) with Redis-backed BullMQ queues.",
+        "Hardened platform security: rate limiting, RBAC, signed sessions, strict input validation, and audit logging to prevent abuse, injection, and account takeover.",
+        "Built microservices and automation pipelines (browser automation, transactional email, LinkedIn scraping) with Redis-backed BullMQ queues handling retries, backoff, and rate-limited dispatch.",
       ],
-      tags: ["Go", "Rust", "Next.js", "Fastify", "ClickHouse", "Redis"],
+      tags: ["Go", "Fiber", "Fastify", "Next.js", "ClickHouse", "Redis", "BullMQ", "Puppeteer", "AWS SES", "Docker", "MongoDB"],
       current: true,
     },
   ],

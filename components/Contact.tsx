@@ -10,7 +10,7 @@ export function Contact() {
 
       <p className="text-[15.5px] leading-[1.78] text-fg-soft mb-9 max-w-[60ch]">
         I&apos;m open to{" "}
-        <span className="font-serif-italic text-fg">interesting work</span> —
+        <span className="font-serif-italic text-fg">interesting work</span>:
         full-time roles, freelance, or just a good conversation about systems
         and frontend craft.
       </p>

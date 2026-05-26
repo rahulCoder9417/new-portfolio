@@ -7,7 +7,7 @@ import { ProjectFooter } from "@/components/project/ProjectFooter";
 const p = config.SecondaryProject;
 
 export const metadata = {
-  title: `${p.title} — ${config.name}`,
+  title: `${p.title} · ${config.name}`,
   description: p.category,
 };
 
@@ -18,7 +18,7 @@ const accessControl = [
   },
   {
     role: "Member",
-    desc: "Approved users — discover, borrow, return, and track their own activity. Rate-limited.",
+    desc: "Approved users , discover, borrow, return, and track their own activity. Rate-limited.",
   },
   {
     role: "Admin",
@@ -46,7 +46,7 @@ export default function BookwisePage() {
 
       <ProjectSection num="01" path="problem" title="The problem">
         <p>
-          Most library-management projects are CRUD demos — a form, a list, no
+          Most library-management projects are CRUD demos , a form, a list, no
           real notion of who is allowed to do what. BookWise is an attempt to
           build the same thing the way it would actually ship: approval-based
           onboarding, role-based access, and reliable background workflows.

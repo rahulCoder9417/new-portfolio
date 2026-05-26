@@ -7,14 +7,14 @@ import { ProjectFooter } from "@/components/project/ProjectFooter";
 const p = config.ThirdProject;
 
 export const metadata = {
-  title: `${p.title} — ${config.name}`,
+  title: `${p.title} · ${config.name}`,
   description: p.category,
 };
 
 const phases = [
   {
     name: "Foundation",
-    desc: "TCP server that speaks the RESP wire protocol — PING/PONG, ECHO, then SET/GET. Connection lifecycle and a per-connection request loop.",
+    desc: "TCP server that speaks the RESP wire protocol , PING/PONG, ECHO, then SET/GET. Connection lifecycle and a per-connection request loop.",
   },
   {
     name: "Concurrency",
@@ -26,11 +26,11 @@ const phases = [
   },
   {
     name: "Transactions",
-    desc: "MULTI / EXEC queueing with WATCH-based optimistic concurrency — aborts on conflict instead of locking.",
+    desc: "MULTI / EXEC queueing with WATCH-based optimistic concurrency , aborts on conflict instead of locking.",
   },
   {
     name: "Replication",
-    desc: "Master–replica replication via command propagation, replication offsets, partial resync.",
+    desc: "Master to replica replication via command propagation, replication offsets, partial resync.",
   },
   {
     name: "Persistence",
@@ -58,8 +58,8 @@ export default function GoRedisPage() {
         <p>
           Redis is one of those tools you use every day without ever thinking
           about. Writing one from scratch in Go was a way to actually feel where
-          the design choices come from — protocol parsing, expiration, blocking
-          operations, replication, persistence — instead of just reading about
+          the design choices come from , protocol parsing, expiration, blocking
+          operations, replication, persistence , instead of just reading about
           them.
         </p>
         <p>

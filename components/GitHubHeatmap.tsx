@@ -74,7 +74,7 @@ export function GitHubHeatmap() {
         </div>
       ) : errored || commits.length === 0 ? (
         <p className="text-sm font-mono text-muted">
-          <span className="text-accent">$</span> echo $GITHUB_TOKEN <span className="text-muted/60"># (not set — heatmap hidden)</span>
+          <span className="text-accent">$</span> echo $GITHUB_TOKEN <span className="text-muted/60"># (not set, heatmap hidden)</span>
         </p>
       ) : (
         <>

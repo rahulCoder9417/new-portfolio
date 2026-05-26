@@ -7,7 +7,7 @@ import { ProjectFooter } from "@/components/project/ProjectFooter";
 const p = config.FeaturedProject;
 
 export const metadata = {
-  title: `${p.title} — ${config.name}`,
+  title: `${p.title} · ${config.name}`,
   description: p.category,
 };
 
@@ -15,7 +15,7 @@ const architecture = [
   {
     layer: "Client",
     name: "Browser IDE",
-    desc: "Unified interface containing editor, terminal, preview, and chat — all synchronized across users.",
+    desc: "Unified interface containing editor, terminal, preview, and chat , all synchronized across users.",
     parts: ["Code editor", "Terminal", "Chat", "Live preview"],
   },
   {
@@ -61,7 +61,7 @@ export default function DevSyncPage() {
         <p>
           DevSync sits in between. It gives a team a shared Next.js editor with
           live cursors, plus a real Linux container behind it where the code
-          actually runs — frontends, backends, even GUI apps streamed back to
+          actually runs , frontends, backends, even GUI apps streamed back to
           the browser.
         </p>
       </ProjectSection>
