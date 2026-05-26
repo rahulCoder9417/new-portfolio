@@ -4,6 +4,7 @@ import { ProjectFooter } from "@/components/project/ProjectFooter";
 import { WalkthroughStep } from "@/components/project/WalkthroughStep";
 import { SyncedVideos } from "@/components/project/SyncedVideos";
 import { DemoVideo } from "@/components/project/DemoVideo";
+import { FullBleed } from "@/components/project/FullBleed";
 
 const p = config.FeaturedProject;
 
@@ -80,12 +81,14 @@ export default function DevSyncPage() {
         title="Real-time code syncing"
         blurb="Two users editing the same file. Keystrokes, cursors, and selections propagate over WebSockets backed by Yjs CRDTs — no refreshes, no locks, no merge prompts."
       >
-        <SyncedVideos
-          srcA={`${V}/1sharing.mp4`}
-          srcB={`${V}/1recieving.mp4`}
-          labelA="host"
-          labelB="peer"
-        />
+        <FullBleed max="1700px">
+          <SyncedVideos
+            srcA={`${V}/1sharing.mp4`}
+            srcB={`${V}/1recieving.mp4`}
+            labelA="host"
+            labelB="peer"
+          />
+        </FullBleed>
         {detail(
           <>
             <p>
@@ -111,10 +114,12 @@ export default function DevSyncPage() {
         title="Integrated terminal execution"
         blurb="A real shell wired into a per-room Docker container. Install dependencies, run a dev server, ship a static site — same workflow as a local machine."
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <DemoVideo src={`${V}/TerminalBasic.mp4`} caption="basic shell" />
-          <DemoVideo src={`${V}/TerminalStaticWebsite.mp4`} caption="serving a static site" />
-        </div>
+        <FullBleed max="1700px">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <DemoVideo src={`${V}/TerminalBasic.mp4`} caption="basic shell" />
+            <DemoVideo src={`${V}/TerminalStaticWebsite.mp4`} caption="serving a static site" />
+          </div>
+        </FullBleed>
         {detail(
           <p>
             The terminal is a full pseudo-tty connected to the room&apos;s
@@ -132,12 +137,14 @@ export default function DevSyncPage() {
         title="File system synchronization"
         blurb="Create, rename, move, delete — file operations on either side propagate to every connected peer, with the tree state derived from a single authoritative event log."
       >
-        <SyncedVideos
-          srcA={`${V}/2sharing.mp4`}
-          srcB={`${V}/2recevieng.mp4`}
-          labelA="host"
-          labelB="peer"
-        />
+        <FullBleed max="1700px">
+          <SyncedVideos
+            srcA={`${V}/2sharing.mp4`}
+            srcB={`${V}/2recevieng.mp4`}
+            labelA="host"
+            labelB="peer"
+          />
+        </FullBleed>
         {detail(
           <p>
             File-tree mutations are broadcast as discrete events. Peers apply

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { config } from "@/utils/config";
 import { SectionHeader } from "./SectionHeader";
+import { FullBleed } from "./project/FullBleed";
 
 type CommitDay = { date: string; count: number };
 
@@ -14,15 +15,40 @@ function shadeClass(count: number) {
   return "bg-accent shadow-[0_0_8px_var(--accent-soft)]";
 }
 
-/** Pad commit array so it lays out cleanly as 7-row × N-week grid. */
-function buildGrid(commits: CommitDay[]) {
-  if (commits.length === 0) return { cells: [] as (CommitDay | null)[], weeks: 0 };
+const MONTH_NAMES = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
+type MonthGroup = {
+  key: string;
+  label: string;
+  weeks: (CommitDay | null)[][]; // each week = 7 days, Sun-anchored
+};
+
+/** Split commits into month groups, padded so each week is exactly 7 days. */
+function buildMonthGroups(commits: CommitDay[]): MonthGroup[] {
+  if (commits.length === 0) return [];
+
   const first = new Date(commits[0].date + "T00:00:00");
-  const startPad = first.getDay(); // 0=Sun … 6=Sat
+  const startPad = first.getDay();
   const cells: (CommitDay | null)[] = Array(startPad).fill(null).concat(commits);
-  const weeks = Math.ceil(cells.length / 7);
-  while (cells.length < weeks * 7) cells.push(null);
-  return { cells, weeks };
+  while (cells.length % 7 !== 0) cells.push(null);
+
+  const weeks: (CommitDay | null)[][] = [];
+  for (let i = 0; i < cells.length; i += 7) weeks.push(cells.slice(i, i + 7));
+
+  const groups: MonthGroup[] = [];
+  for (const week of weeks) {
+    const firstReal = week.find((d) => d !== null);
+    if (!firstReal) continue;
+    const key = firstReal.date.slice(0, 7);
+    const label = MONTH_NAMES[Number(key.slice(5, 7)) - 1];
+    const last = groups[groups.length - 1];
+    if (last && last.key === key) last.weeks.push(week);
+    else groups.push({ key, label, weeks: [week] });
+  }
+  return groups;
 }
 
 export function GitHubHeatmap() {
@@ -54,11 +80,17 @@ export function GitHubHeatmap() {
   }, []);
 
   const totalDays = config.gitMonths * 30 + 1;
-  const { cells, weeks } = useMemo(() => buildGrid(commits), [commits]);
+  const groups = useMemo(() => buildMonthGroups(commits), [commits]);
+
+  // Cell size: clamps so 6 months fit without horizontal scroll on common viewports
+  // and never get either tiny or absurdly large.
+  const cellStyle: React.CSSProperties = {
+    width: "clamp(18px, 2.4vw, 30px)",
+    height: "clamp(18px, 2.4vw, 30px)",
+  };
 
   return (
-    // Full-bleed: breaks out of the main column so the heatmap reads as a real artifact
-    <section className="py-24 border-t border-[color:var(--border)] relative left-1/2 -translate-x-1/2 w-screen max-w-[1200px] px-6">
+    <section className="py-20 border-t border-[color:var(--border)]">
       <SectionHeader
         num="04"
         path="github"
@@ -85,37 +117,47 @@ export function GitHubHeatmap() {
           <span className="text-accent">$</span> echo $GITHUB_TOKEN <span className="text-muted/60"># (not set, heatmap hidden)</span>
         </p>
       ) : (
-        <>
-          <div
-            className="grid gap-[4px] w-full"
-            style={{
-              gridTemplateColumns: `repeat(${weeks}, minmax(0, 1fr))`,
-              gridTemplateRows: "repeat(7, 1fr)",
-              gridAutoFlow: "column",
-            }}
-          >
-            {cells.map((d, i) =>
-              d ? (
-                <div
-                  key={i}
-                  title={`${d.count} commit${d.count === 1 ? "" : "s"} · ${d.date}`}
-                  className={`aspect-square rounded-[4px] ${shadeClass(d.count)} hover:scale-125 transition-transform`}
-                />
-              ) : (
-                <div key={i} className="aspect-square" aria-hidden />
-              ),
-            )}
+        <FullBleed max="1100px">
+          {/* Horizontal scroll only kicks in on very narrow viewports */}
+          <div className="overflow-x-auto -mx-2 px-2">
+            <div className="flex items-end gap-4 w-fit mx-auto">
+              {groups.map((g) => (
+                <div key={g.key} className="flex flex-col gap-2">
+                  <span className="text-[11px] font-mono uppercase tracking-[0.18em] text-muted px-0.5">
+                    {g.label}
+                  </span>
+                  <div className="flex gap-[3px]">
+                    {g.weeks.map((week, wi) => (
+                      <div key={wi} className="flex flex-col gap-[3px]">
+                        {week.map((d, di) =>
+                          d ? (
+                            <div
+                              key={di}
+                              title={`${d.count} commit${d.count === 1 ? "" : "s"} · ${d.date}`}
+                              className={`rounded-[4px] ${shadeClass(d.count)} hover:scale-125 transition-transform`}
+                              style={cellStyle}
+                            />
+                          ) : (
+                            <div key={di} aria-hidden style={cellStyle} />
+                          ),
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="mt-8 flex items-center justify-between text-[12px] font-mono text-muted uppercase tracking-[0.12em]">
-            <div className="flex items-center gap-2.5">
+          <div className="mt-8 flex items-center justify-between text-[11px] font-mono text-muted uppercase tracking-[0.12em]">
+            <div className="flex items-center gap-2">
               <span>less</span>
-              <div className="flex gap-1">
-                <div className="h-3 w-3 rounded-[3px] bg-[color:var(--border)]" />
-                <div className="h-3 w-3 rounded-[3px] bg-accent/30" />
-                <div className="h-3 w-3 rounded-[3px] bg-accent/60" />
-                <div className="h-3 w-3 rounded-[3px] bg-accent/85" />
-                <div className="h-3 w-3 rounded-[3px] bg-accent" />
+              <div className="flex gap-0.5">
+                <div className="h-2.5 w-2.5 rounded-[2px] bg-[color:var(--border)]" />
+                <div className="h-2.5 w-2.5 rounded-[2px] bg-accent/30" />
+                <div className="h-2.5 w-2.5 rounded-[2px] bg-accent/60" />
+                <div className="h-2.5 w-2.5 rounded-[2px] bg-accent/85" />
+                <div className="h-2.5 w-2.5 rounded-[2px] bg-accent" />
               </div>
               <span>more</span>
             </div>
@@ -126,7 +168,7 @@ export function GitHubHeatmap() {
               </span>
             </span>
           </div>
-        </>
+        </FullBleed>
       )}
     </section>
   );
