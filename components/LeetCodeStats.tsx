@@ -2,7 +2,7 @@ import { config } from "@/utils/config";
 import { SectionHeader } from "./SectionHeader";
 
 export function LeetCodeStats() {
-  const { solved, easy, medium, hard } = config.leetCodeStats;
+  const { solved, easy, medium, hard, beats } = config.leetCodeStats;
   const total = easy + medium + hard;
   const buckets = [
     { label: "easy", value: easy, color: "var(--accent)" },
@@ -30,13 +30,19 @@ export function LeetCodeStats() {
       </SectionHeader>
 
       <div className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-x-10 gap-y-8 items-start">
-        <div className="flex items-baseline gap-3">
-          <span className="font-serif-italic text-[64px] leading-none text-fg">
-            {solved}
-          </span>
-          <span className="text-[11px] font-mono text-muted uppercase tracking-[0.16em]">
-            problems<br />solved
-          </span>
+        <div className="flex flex-col gap-2.5">
+          <div className="flex items-baseline gap-3">
+            <span className="font-serif-italic text-[64px] leading-none text-fg">
+              {solved}
+            </span>
+            <span className="text-[11px] font-mono text-muted uppercase tracking-[0.16em]">
+              problems<br />solved
+            </span>
+          </div>
+          <div className="inline-flex items-center gap-2 text-[11px] font-mono text-accent uppercase tracking-[0.16em] border border-[color:var(--border)] bg-[color:var(--accent-soft)] rounded px-2.5 py-1 self-start">
+            <span>beats</span>
+            <span className="text-fg tabular-nums normal-case">{beats}%</span>
+          </div>
         </div>
 
         <ul className="space-y-3.5">

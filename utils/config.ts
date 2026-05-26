@@ -72,16 +72,17 @@ export const config = {
   ],
 
   // ─── GitHub ────────────────────────────────────────────────
-  gitMonths: 4,
+  gitMonths: 6,
   githubUsername: "rahulCoder9417",
   githubProfile: "https://github.com/rahulCoder9417",
 
   // ─── LeetCode ──────────────────────────────────────────────
   leetCodeStats: {
-    solved: 126,
-    easy: 24,
-    medium: 99,
-    hard: 3,
+    solved: 210,
+    easy: 64,
+    medium: 138,
+    hard: 8,
+    beats: 93.5,
   },
   leetCodeProfile: "https://leetcode.com/user7867575/",
 
