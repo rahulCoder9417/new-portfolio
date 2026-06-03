@@ -132,8 +132,8 @@ export const config = {
     isFeatured: false,
     description:
       "GoRedis is a Redis-compatible in-memory database engine built from scratch in Go. It implements the RESP wire protocol so the official redis-cli and existing client SDKs connect natively, with sub-millisecond GET/SET latency on in-memory operations. Under the hood it ships strings with TTL, lists with blocking operations, streams with consumer groups, sorted sets via skip-lists, and geospatial indexing, together with MULTI/EXEC transactions backed by WATCH-based optimistic concurrency, master-replica replication, RDB snapshots, AOF write-ahead logging, Pub/Sub fan-out, and password-based authentication.",
-    imageUrl: "/GoRedis-Main.png",
-    githubRepo: "GoRedis",
+    imageUrl: "/GoRedis-Main.svg",
+    githubRepo: "Redis-In-go",
     highlights: [
       "Built a Redis-compatible database engine in Go implementing the RESP wire protocol, so the official redis-cli and client SDKs connect natively, with sub-millisecond GET/SET latency on in-memory operations.",
       "Implemented core data structures and commands: strings with TTL, lists with blocking ops (BLPOP), streams with consumer groups, sorted sets via skip-lists, and geospatial indexing.",

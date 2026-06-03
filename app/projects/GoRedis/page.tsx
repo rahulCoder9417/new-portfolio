@@ -42,6 +42,25 @@ const phases = [
   },
 ];
 
+const commandGroups = [
+  { name: "Connection & server", cmds: ["PING", "ECHO", "INFO", "TYPE"] },
+  { name: "Strings", cmds: ["SET", "GET", "INCR"] },
+  {
+    name: "Lists",
+    cmds: ["RPUSH", "LPUSH", "LRANGE", "LLEN", "LINDEX", "LPOP", "RPOP", "BLPOP"],
+  },
+  { name: "Streams", cmds: ["XADD", "XRANGE", "XREAD"] },
+  { name: "Transactions", cmds: ["MULTI", "EXEC", "DISCARD", "WATCH", "UNWATCH"] },
+  {
+    name: "Sorted sets",
+    cmds: ["ZADD", "ZRANK", "ZCARD", "ZRANGE", "ZSCORE", "ZREM"],
+  },
+  { name: "Geospatial", cmds: ["GEOADD", "GEOPOS", "GEODIST", "GEORADIUS"] },
+  { name: "Pub/Sub", cmds: ["SUBSCRIBE", "UNSUBSCRIBE", "PUBLISH"] },
+  { name: "Replication", cmds: ["REPLCONF", "PSYNC", "WAIT"] },
+  { name: "Auth", cmds: ["ACL"] },
+];
+
 export default function GoRedisPage() {
   return (
     <>
@@ -99,6 +118,34 @@ export default function GoRedisPage() {
 
       <ProjectSection num="04" path="highlights" title="Highlights">
         <HighlightList items={p.highlights} />
+      </ProjectSection>
+
+      <ProjectSection num="05" path="commands" title="Commands implemented">
+        <p>
+          A hand-written RESP parser backs the dispatcher, so every command
+          below is wire-compatible with the official{" "}
+          <code className="font-mono text-sm">redis-cli</code> and standard
+          client SDKs , the same verbs, replies, and error shapes.
+        </p>
+        <div className="mt-7 space-y-5">
+          {commandGroups.map((group) => (
+            <div
+              key={group.name}
+              className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-x-5 gap-y-2"
+            >
+              <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-muted sm:pt-1">
+                {group.name}
+              </p>
+              <ul className="flex flex-wrap gap-1.5">
+                {group.cmds.map((cmd) => (
+                  <li key={cmd} className="pill font-mono">
+                    {cmd}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </ProjectSection>
 
       <ProjectFooter githubRepo={p.githubRepo} />

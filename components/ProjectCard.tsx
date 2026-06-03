@@ -44,7 +44,7 @@ export function ProjectCard({
 
         {/* Thumbnail */}
         <div className="relative shrink-0 w-12 h-12 sm:w-22 sm:h-22 sm:row-span-1 rounded overflow-hidden border border-[color:var(--border)] bg-bg-soft flex items-center justify-center transition-all duration-500 group-hover:border-accent group-hover:shadow-[0_0_0_1px_var(--accent-soft)]">
-          {project.imageUrl && project.imageUrl !== "/GoRedis-Main.png" ? (
+          {project.imageUrl ? (
             <>
               <Image
                 src={project.imageUrl}

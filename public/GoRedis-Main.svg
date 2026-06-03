@@ -1,0 +1,59 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GoRedis — Redis-compatible database engine written in Go">
+  <defs>
+    <radialGradient id="bg" cx="38%" cy="30%" r="90%">
+      <stop offset="0%" stop-color="#1d1c1a"/>
+      <stop offset="62%" stop-color="#121210"/>
+      <stop offset="100%" stop-color="#0a0a09"/>
+    </radialGradient>
+    <linearGradient id="top" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff5b48"/>
+      <stop offset="100%" stop-color="#e3392b"/>
+    </linearGradient>
+    <linearGradient id="gobadge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#29c4e8"/>
+      <stop offset="100%" stop-color="#00add8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+
+  <!-- faint dotted grid echo of the site backdrop -->
+  <g fill="#ffffff" opacity="0.035">
+    <circle cx="80" cy="80" r="2"/><circle cx="140" cy="80" r="2"/><circle cx="200" cy="80" r="2"/>
+    <circle cx="80" cy="140" r="2"/><circle cx="432" cy="432" r="2"/><circle cx="372" cy="432" r="2"/>
+    <circle cx="432" cy="372" r="2"/>
+  </g>
+
+  <!-- Redis-style isometric stack: three layers, drawn bottom-up -->
+  <!-- layer geometry: top-rhombus + left/right side walls, thickness 46 -->
+  <g>
+    <!-- bottom layer (dy = 150) -->
+    <g transform="translate(0,150)">
+      <path d="M256 132 L380 196 L256 260 L132 196 Z" fill="#7d160c"/>
+      <path d="M132 196 L256 260 L256 306 L132 242 Z" fill="#8c1a0f"/>
+      <path d="M256 260 L380 196 L380 242 L256 306 Z" fill="#a41e11"/>
+    </g>
+    <!-- middle layer (dy = 76) -->
+    <g transform="translate(0,76)">
+      <path d="M256 132 L380 196 L256 260 L132 196 Z" fill="#c5281c"/>
+      <path d="M132 196 L256 260 L256 306 L132 242 Z" fill="#9c1c10"/>
+      <path d="M256 260 L380 196 L380 242 L256 306 Z" fill="#b5241a"/>
+    </g>
+    <!-- top layer (dy = 0) -->
+    <g>
+      <path d="M256 132 L380 196 L256 260 L132 196 Z" fill="url(#top)"/>
+      <path d="M132 196 L256 260 L256 306 L132 242 Z" fill="#b5241a"/>
+      <path d="M256 260 L380 196 L380 242 L256 306 Z" fill="#cf2c1f"/>
+      <!-- glint on the crown -->
+      <path d="M256 150 L348 198 L256 246 L164 198 Z" fill="#ffffff" opacity="0.12"/>
+    </g>
+  </g>
+
+  <!-- Go badge, lower-right, the cyan that fuses the two brands -->
+  <g transform="translate(330,316)">
+    <circle cx="64" cy="64" r="68" fill="#0a0a09"/>
+    <circle cx="64" cy="64" r="60" fill="url(#gobadge)"/>
+    <text x="64" y="64" font-family="'Helvetica Neue',Arial,sans-serif" font-size="58" font-weight="700"
+          fill="#062a32" text-anchor="middle" dominant-baseline="central" letter-spacing="-2">Go</text>
+  </g>
+</svg>
