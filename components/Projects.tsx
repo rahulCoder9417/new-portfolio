@@ -1,23 +1,24 @@
 import { config } from "@/utils/config";
 import { SectionHeader } from "./SectionHeader";
-import { ProjectCard } from "./ProjectCard";
+import { ProjectCard, ProjectRow } from "./ProjectCard";
 
 export function Projects() {
-  const projects = [config.FeaturedProject, config.ThirdProject, config.SecondaryProject];
   return (
-    <section id="projects" className="py-20 border-t border-[color:var(--border)]">
-      <SectionHeader
-        num="02"
-        path="projects"
-        right={<span>{projects.length} selected</span>}
-      >
-        Selected work
-      </SectionHeader>
-      <div className="divide-y divide-[color:var(--border)]">
-        {projects.map((p, i) => (
-          <ProjectCard key={p.title} project={p} index={i} />
+    <section id="projects" className="py-16 border-t border-[color:var(--border)] scroll-mt-14">
+      <SectionHeader>Projects</SectionHeader>
+
+      <div className="-mt-8 divide-y divide-[color:var(--border)]">
+        {config.featuredProjects.map((p) => (
+          <ProjectCard key={p.title} project={p} />
         ))}
       </div>
+
+      <h3 className="mt-10 text-[13px] font-medium text-muted">Other projects</h3>
+      <ul className="mt-2 divide-y divide-[color:var(--border)]">
+        {config.otherProjects.map((p) => (
+          <ProjectRow key={p.title} project={p} />
+        ))}
+      </ul>
     </section>
   );
 }

@@ -18,12 +18,12 @@ export function ShotFrame({ src, alt, caption, priority }: Props) {
           height={1000}
           sizes="(min-width: 768px) 720px, 100vw"
           loading={priority ? "eager" : "lazy"}
-          priority={priority}
+          fetchPriority={priority ? "high" : undefined}
           className="w-full h-auto object-cover"
         />
       </div>
       {caption && (
-        <figcaption className="mt-2 text-[11px] font-mono uppercase tracking-[0.14em] text-muted">
+        <figcaption className="mt-2 text-[13px] text-muted">
           {caption}
         </figcaption>
       )}

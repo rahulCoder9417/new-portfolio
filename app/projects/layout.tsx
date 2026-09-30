@@ -3,7 +3,7 @@ import { Header } from "@/components/Header";
 export default function ProjectsLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Header />
+      <Header wide />
       <main className="max-w-4xl mx-auto px-6">{children}</main>
     </>
   );

@@ -1,26 +1,147 @@
 import { Github, Linkedin, Mail, Twitter } from "lucide-react";
 
+export type Project = {
+  title: string;
+  /** Route segment under /projects when the project has a detail page. */
+  slug?: string;
+  year?: string;
+  category: string;
+  /** One or two sentences for the project list. */
+  summary: string;
+  /** Longer intro for the detail page. */
+  description?: string;
+  status?: string;
+  imageUrl?: string;
+  githubRepo?: string;
+  liveUrl?: string;
+  liveLabel?: string;
+  highlights?: string[];
+  tags: string[];
+};
+
+const textcrew: Project = {
+  title: "Textcrew",
+  slug: "Textcrew",
+  year: "2026",
+  category: "Personal AI agent platform",
+  status: "Pre-launch",
+  summary:
+    "A personal AI agent you text on WhatsApp, Telegram or iMessage. Each user's agent runs in its own gVisor sandbox and does real work in their apps. I designed the system and built the backend and the Go container manager.",
+  description:
+    "Textcrew is a messaging-first personal assistant. Each user talks to their own AI agent on WhatsApp, Telegram, iMessage or the web app. The agent runs in its own sandboxed container, works in about 25 apps (Gmail, Calendar, Notion, Slack, GitHub and others) through Composio, asks before risky actions, remembers the user, runs reminders and automations, and is billed in credits.\n\nI did the system design and backend engineering: the architecture, the API contract, the backend (api + worker) and the Go service that manages every user's container.",
+  imageUrl: "/Textcrew-Main.png",
+  liveUrl: "https://textcrew.in",
+  liveLabel: "textcrew.in",
+  tags: ["TypeScript", "Go", "gRPC", "MCP", "BullMQ", "gVisor"],
+};
+
+const devsync: Project = {
+  title: "DevSync",
+  slug: "DevSync",
+  year: "2025",
+  category: "Collaborative cloud IDE",
+  summary:
+    "A browser IDE where up to 15 people edit the same repository at once. Each room gets its own Docker container with a shared terminal, live preview and GUI app support.",
+  description:
+    "DevSync lets a team open the same project in the browser and work on it together. Edits, cursors and selections sync through Yjs CRDTs over WebSockets, and every room runs in its own Docker container, so the terminal, dev servers and even Tkinter apps behave like they would on a local machine. Project state is saved, so a room can be picked up again later.",
+  imageUrl: "/DevSync-Main.png",
+  githubRepo: "dev-sync",
+  liveUrl: "https://dev-sync-blush.vercel.app/",
+  highlights: [
+    "Up to 15 people editing the same repository at once through Yjs CRDTs over WebSockets, with cursor and selection sync.",
+    "Collaboration (WebSocket, CRDT sync, presence) runs as its own service, separate from persistence and code execution, so each part scales on its own.",
+    "A Docker execution backend with isolated disk per room that runs React and Express apps and GUI apps (Tkinter), exposed through a reverse proxy.",
+    "Team chat next to the editor on the same connection.",
+  ],
+  tags: ["Next.js", "Yjs", "WebSocket", "Docker", "Express", "Prisma", "Xvfb"],
+};
+
+const goredis: Project = {
+  title: "GoRedis",
+  slug: "GoRedis",
+  year: "2026",
+  category: "Redis-compatible database, written from scratch",
+  summary:
+    "A Redis-compatible server in Go. The official redis-cli and client libraries connect to it unchanged. Covers strings with TTL, lists, streams, sorted sets, transactions, replication and persistence.",
+  description:
+    "GoRedis is an in-memory database written from scratch in Go. It speaks the RESP wire protocol, so the official redis-cli and existing client libraries connect without knowing the difference. It has strings with TTL, lists with blocking pops, streams with consumer groups, sorted sets on a skip list and geospatial indexes, plus MULTI/EXEC transactions with WATCH, master-replica replication, RDB snapshots, an append-only log, Pub/Sub and password auth.",
+  imageUrl: "/GoRedis-Main.svg",
+  githubRepo: "Redis-In-go",
+  highlights: [
+    "A hand-written RESP parser, so redis-cli and client libraries connect natively. In-memory GET/SET stays under a millisecond.",
+    "Strings with TTL, lists with blocking operations (BLPOP), streams with consumer groups, sorted sets on a skip list, and geospatial indexing.",
+    "MULTI/EXEC transactions with WATCH-based optimistic concurrency, plus master-replica replication, RDB snapshots, AOF logging, Pub/Sub and auth.",
+  ],
+  tags: ["Go", "TCP", "RESP"],
+};
+
+const renderer: Project = {
+  title: "3D Renderer",
+  category: "Rust",
+  summary:
+    "A wireframe 3D renderer in Rust. Projection, rotation matrices and a free-look camera are written by hand; SDL3 only draws the pixels.",
+  githubRepo: "3d-Render-",
+  tags: ["Rust", "SDL3", "Linear algebra"],
+};
+
+const webServer: Project = {
+  title: "Multi-threaded Web Server",
+  category: "Rust",
+  summary:
+    "An HTTP server on raw TCP with a hand-written thread pool. Workers pull jobs from a shared channel and shut down cleanly when the pool is dropped.",
+  githubRepo: "Multi-threaded-Web-server",
+  tags: ["Rust", "TCP", "Threads"],
+};
+
+const bookwise: Project = {
+  title: "Bookwise",
+  slug: "Bookwise",
+  year: "2025",
+  category: "Library management system",
+  summary:
+    "A library app with approval-based sign-up, an admin dashboard, rate limiting and scheduled overdue-reminder emails.",
+  description:
+    "Bookwise is a full-stack library management system. Members discover, borrow and return books through an approval-based flow. Admins manage users and inventory behind protected routes. Background jobs send emails, reminders and overdue notices.",
+  imageUrl: "/Library-Main.png",
+  githubRepo: "Library",
+  liveUrl: "https://library-beta-seven.vercel.app",
+  highlights: [
+    "A protected admin dashboard for member approvals, inventory and borrowing.",
+    "QStash background workflows with Nodemailer that send overdue-book reminders.",
+    "Rate limiting on the API to slow down abuse and scraping.",
+  ],
+  tags: ["Next.js", "Drizzle", "Upstash Redis", "QStash", "Nodemailer"],
+};
+
+const newtube: Project = {
+  title: "NewTube",
+  category: "Social media platform",
+  summary:
+    "A MERN app that combines long videos, vertical shorts, text posts and photos, with nested comments, playlists, watch history and subscriptions.",
+  githubRepo: "3-Newtube",
+  tags: ["React", "Node.js", "Express", "MongoDB"],
+};
+
 export const config = {
   // ─── Personal ──────────────────────────────────────────────
   name: "Rahul Kumar",
-  logo: "RK",
   title: "Software Engineer",
-  freelanceTagline: "Available for full-stack & low-level freelance work",
+  freelanceTagline: "Available for freelance work",
   location: "Chandigarh, India",
   resumePath: "/Resume.pdf",
+  email: "rahulkum94l94@gmail.com",
 
   // ─── SEO / Metadata ───────────────────────────────────────
   seo: {
     title: "Rahul Kumar · Software Engineer",
     description:
-      "Software engineer shipping production systems in TypeScript, Go, and Rust. Polished frontend components in React/Next.js, reliable services, and high-performance data pipelines. Open to freelance work.",
+      "Software engineer building backends, AI agents and the infrastructure they run on, in TypeScript, Go and Rust. Open to freelance work.",
   },
 
   // ─── Hero ──────────────────────────────────────────────────
   hero: {
-    greeting: "Hi, I'm",
-    subtitle:
-      "Software engineer shipping production systems in TypeScript, Go, and Rust. I craft polished, accessible frontend components in React/Next.js, build reliable services in Rust, and engineer high-performance APIs and data pipelines end to end, with a focus on caching, security, and low-latency query scaling.",
+    intro:
+      "I build backends and the systems around them: APIs, job queues, AI agents, and the infrastructure they run on. Most of my work is in TypeScript, Go and Postgres, with Rust on the side.",
   },
 
   // ─── Navigation ────────────────────────────────────────────
@@ -37,39 +158,26 @@ export const config = {
     status: "BCA Student",
     open_to_work: true,
     bio: [
-      "I'm a Software Engineer focused on building things end to end, from polished UI to the systems behind them.",
-      "Currently I work full-stack on the Enrich platform: shipping the frontend in Next.js, backend services in Go and Node, and ClickHouse-backed analytics over hundreds of millions of records. Comfortable writing raw SQL by hand when an ORM gets in the way.",
-      "Outside professional work I build DevSync, a collaborative low-latency cloud IDE, and write low-level systems for fun, like a Redis-compatible database engine in Go. I also solve DSA.",
+      "I'm a software engineer and BCA student. I like owning a feature from the database schema to the UI, and the part I care about most is the backend: data models, queues, retries, and what happens when something fails.",
+      "At InboxKit I build the Enrich platform: the Next.js frontend, services in Go and Node, and ClickHouse analytics over 300M+ records. I write raw SQL when an ORM gets in the way.",
+      "A lot of my recent work is AI agents. I build on the Claude API and MCP, and Claude Code is part of how I work every day: I break a design into phases and run parallel agents on separate git branches. I also build RAG pipelines and agent workflows with LangChain and LangGraph.",
+      "For operations I run services in Docker and set up monitoring with Prometheus, Grafana, Loki and Tempo, so metrics, logs and traces are in one place.",
+      "Outside work I write systems code to see how things work underneath: a Redis-compatible server in Go, and a thread-pool web server and a small 3D renderer in Rust.",
     ],
   },
 
-  // ─── Tech Stack (mirrors resume categories) ────────────────
+  // ─── Tech Stack ────────────────────────────────────────────
   techStack: {
     categories: [
-      { label: "Languages",  items: ["TypeScript", "JavaScript", "Go", "Rust", "SQL"] },
-      { label: "Frontend",   items: ["Next.js", "React.js", "Redux Toolkit", "Tailwind CSS", "Shadcn UI"] },
-      { label: "Backend",    items: ["Node.js", "Express.js", "Fastify", "Echo", "Fiber", "gRPC", "WebSockets", "REST APIs"] },
-      { label: "Databases",  items: ["PostgreSQL", "MongoDB", "ClickHouse", "Redis"] },
-      { label: "DevOps",     items: ["Docker", "GitHub Actions", "AWS (SES)", "Prisma", "Drizzle ORM", "BullMQ"] },
+      { label: "Languages", items: ["TypeScript", "JavaScript", "Go", "Rust", "Python", "SQL"] },
+      { label: "Frontend", items: ["Next.js", "React", "Redux Toolkit", "Tailwind CSS", "shadcn/ui"] },
+      { label: "Backend", items: ["Node.js", "Hono", "Express", "Fastify", "Fiber", "Echo", "gRPC", "WebSockets", "OpenAPI"] },
+      { label: "AI & agents", items: ["Claude API", "Claude Code", "MCP", "LangChain", "LangGraph", "RAG", "LiteLLM"] },
+      { label: "Data", items: ["PostgreSQL", "ClickHouse", "MongoDB", "Redis", "BullMQ", "Drizzle", "Prisma"] },
+      { label: "DevOps", items: ["Docker", "gVisor", "GitHub Actions", "Caddy", "AWS SES"] },
+      { label: "Observability", items: ["Prometheus", "Grafana", "Loki", "Tempo"] },
     ],
   },
-
-  coreExpertise: [
-    "Full-Stack Engineering",
-    "Backend Architecture",
-    "Data Structures & Algorithms",
-    "Real-Time Systems",
-    "System Design Fundamentals",
-    "API Design & Integration",
-    "Performance & Scalability",
-  ],
-
-  architecture: [
-    "Real-time systems using WebSockets",
-    "Dockerized backend services",
-    "REST + WebSocket hybrid APIs",
-    "Database-driven scalable architectures",
-  ],
 
   // ─── GitHub ────────────────────────────────────────────────
   gitMonths: 6,
@@ -87,76 +195,25 @@ export const config = {
   leetCodeProfile: "https://leetcode.com/user7867575/",
 
   // ─── Projects ──────────────────────────────────────────────
-  FeaturedProject: {
-    title: "DevSync",
-    year: "2025",
-    liveUrl: "https://dev-sync-blush.vercel.app/",
-    category: "Real-Time Collaborative Coding Platform",
-    description:
-      "DevSync is a real-time collaborative developer platform that enables teams to write code, execute commands, and collaborate live within a shared environment. It features synchronized editors, an integrated terminal for live execution, and WebSocket-driven state sharing to maintain real-time consistency across users. The platform is backed by a scalable Node.js architecture, supports isolated execution using containerized environments, and ensures persistent project state to enable reliable, multi-user collaboration across sessions.",
-    imageUrl: "/DevSync-Main.png",
-    isFeatured: true,
-    githubRepo: "DevSync",
-    highlights: [
-      "Built a Next.js collaborative coding platform supporting up to 15 developers editing the same repository simultaneously in real time via Yjs CRDTs over WebSocket, with low-latency cursor and selection sync.",
-      "Architected a distributed microservices system separating collaboration (WebSocket, CRDT sync, presence) from persistence and execution layers for horizontal scalability.",
-      "Developed a Dockerized execution backend with isolated disk storage, capable of running React, Express, and GUI apps (Tkinter), exposed securely via a reverse proxy.",
-      "Integrated a real-time chat system alongside the editor for seamless team communication during sessions.",
-    ],
-    tags: ["Next.js", "Prisma", "Yjs", "Xvfb", "WebSocket", "Express", "Docker"],
-  },
-
-  SecondaryProject: {
-    title: "Bookwise",
-    year: "2025",
-    liveUrl: "",
-    category: "Enterprise Library Management System",
-    description:
-      "BookWise is a full-stack library management system designed with real-world access control and automation. Users can discover, borrow, and return books through a secure, approval-based flow. Admins manage users and inventory with protected routes and fine-grained permissions. Background workflows automate emails, reminders, and overdue handling reliably.",
-    isFeatured: false,
-    imageUrl: "/Library-Main.png",
-    githubRepo: "Bookwise",
-    highlights: [
-      "Implemented a protected admin dashboard for user approvals, inventory management, and borrowing workflows.",
-      "Integrated QStash background workflows with Nodemailer to automatically send overdue-book reminder emails.",
-      "Hardened the API surface with rate limiting and request throttling to mitigate abuse and DDoS risk.",
-    ],
-    tags: ["Next.js", "Upstash", "Drizzle", "Redis", "Nodemailer"],
-  },
-
-  ThirdProject: {
-    title: "GoRedis",
-    year: "2026",
-    liveUrl: "",
-    category: "Redis-Compatible In-Memory Database (from Scratch)",
-    isFeatured: false,
-    description:
-      "GoRedis is a Redis-compatible in-memory database engine built from scratch in Go. It implements the RESP wire protocol so the official redis-cli and existing client SDKs connect natively, with sub-millisecond GET/SET latency on in-memory operations. Under the hood it ships strings with TTL, lists with blocking operations, streams with consumer groups, sorted sets via skip-lists, and geospatial indexing, together with MULTI/EXEC transactions backed by WATCH-based optimistic concurrency, master-replica replication, RDB snapshots, AOF write-ahead logging, Pub/Sub fan-out, and password-based authentication.",
-    imageUrl: "/GoRedis-Main.svg",
-    githubRepo: "Redis-In-go",
-    highlights: [
-      "Built a Redis-compatible database engine in Go implementing the RESP wire protocol, so the official redis-cli and client SDKs connect natively, with sub-millisecond GET/SET latency on in-memory operations.",
-      "Implemented core data structures and commands: strings with TTL, lists with blocking ops (BLPOP), streams with consumer groups, sorted sets via skip-lists, and geospatial indexing.",
-      "Engineered MULTI/EXEC transactions with WATCH-based optimistic concurrency control, plus master-replica replication, RDB snapshots, AOF write-ahead logging, Pub/Sub, and auth.",
-    ],
-    tags: ["Go", "TCP", "RESP Protocol"],
-  },
+  projects: { textcrew, devsync, goredis, renderer, webServer, bookwise, newtube },
+  featuredProjects: [textcrew, devsync, goredis],
+  otherProjects: [renderer, webServer, bookwise, newtube],
 
   // ─── Experience ────────────────────────────────────────────
   experience: [
     {
       role: "Full-Stack Software Engineer",
       company: "InboxKit",
+      companyUrl: "https://inboxkit.com",
       location: "Remote",
-      period: "Jan 2026 → Present",
-      description:
-        "Building scalable full-stack applications end to end for the Enrich platform.",
+      period: "Jan 2026 – Present",
+      description: "Building the Enrich platform end to end.",
       highlights: [
-        "Owned the Enrich Platform end to end: designed and shipped the full product (frontend, backend, infra, deployment), including the REST API surface powering the customer dashboard and an internal admin dashboard for monitoring and abuse detection.",
-        "Designed and built the customer-facing UI in Next.js, Tailwind, and Shadcn: dashboards, billing, analytics, and a reusable component library with accessible, responsive layouts across breakpoints.",
-        "Architected ClickHouse-backed analytics over 300M+ records, applying multi-tier Redis caching, query rewriting, and partitioning to keep dashboard queries at sub-second p95 latency.",
-        "Hardened platform security: rate limiting, RBAC, signed sessions, strict input validation, and audit logging to prevent abuse, injection, and account takeover.",
-        "Built microservices and automation pipelines (browser automation, transactional email, LinkedIn scraping) with Redis-backed BullMQ queues handling retries, backoff, and rate-limited dispatch.",
+        "Owned the Enrich platform end to end: frontend, backend, infrastructure and deployment, including the REST API behind the customer dashboard and an internal admin dashboard for monitoring and abuse detection.",
+        "Built the customer UI in Next.js, Tailwind and shadcn/ui: dashboards, billing, analytics, and a shared component library with accessible, responsive layouts.",
+        "Designed ClickHouse analytics over 300M+ records, using multi-tier Redis caching, query rewriting and partitioning to keep dashboard queries under a second at p95.",
+        "Added rate limiting, RBAC, signed sessions, strict input validation and audit logging across the platform.",
+        "Built services and automation pipelines (browser automation, transactional email, LinkedIn scraping) on Redis-backed BullMQ queues with retries, backoff and rate-limited dispatch.",
       ],
       tags: ["Go", "Fiber", "Fastify", "Next.js", "ClickHouse", "Redis", "BullMQ", "Puppeteer", "AWS SES", "Docker", "MongoDB"],
       current: true,
@@ -166,22 +223,20 @@ export const config = {
   // ─── Contact ───────────────────────────────────────────────
   primaryContact: [
     {
-      icon: Linkedin,
-      label: "Connect on LinkedIn",
-      href: "https://www.linkedin.com/in/rahul-kumar-511054360/",
-      primary: true,
+      icon: Mail,
+      label: "rahulkum94l94@gmail.com",
+      href: "https://mail.google.com/mail/?view=cm&fs=1&to=rahulkum94l94@gmail.com&su=Work%20Opportunity&body=Hi%20Rahul",
     },
     {
-      icon: Mail,
-      label: "Email Me",
-      href: "https://mail.google.com/mail/?view=cm&fs=1&to=rahulkum94l94@gmail.com&su=Work%20Opportunity&body=Hi%20Rahul",
-      primary: true,
+      icon: Linkedin,
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/rahul-kumar-511054360/",
     },
   ],
 
   secondaryContact: [
-    { icon: Github, label: "GitHub", href: "https://github.com/rahulCoder9417" },
-    { icon: Twitter, label: "Twitter", href: "https://x.com/RahulKumar9417" },
+    { label: "GitHub", href: "https://github.com/rahulCoder9417" },
+    { label: "X / Twitter", href: "https://x.com/RahulKumar9417" },
     { label: "Fiverr", href: "https://www.fiverr.com/s/EgLENK7" },
     { label: "Upwork", href: "https://www.upwork.com/freelancers/~0131fa79af2d84bdfa" },
   ],
@@ -190,11 +245,8 @@ export const config = {
   socials: [
     { icon: Github, label: "GitHub", href: "https://github.com/rahulCoder9417" },
     { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/rahul-kumar-511054360/" },
-    { icon: Twitter, label: "Twitter", href: "https://x.com/RahulKumar9417" },
+    { icon: Twitter, label: "X / Twitter", href: "https://x.com/RahulKumar9417" },
   ],
-
-  // ─── Footer ────────────────────────────────────────────────
-  footer: {
-    tagline: "Built with Next.js and Tailwind CSS.",
-  },
 };
+
+export const githubUrl = (repo: string) => `https://github.com/${config.githubUsername}/${repo}`;

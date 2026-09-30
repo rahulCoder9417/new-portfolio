@@ -5,7 +5,7 @@ import { WalkthroughStep } from "@/components/project/WalkthroughStep";
 import { ShotFrame } from "@/components/project/ShotFrame";
 import { ImageSlider } from "@/components/project/ImageSlider";
 
-const p = config.SecondaryProject;
+const p = config.projects.bookwise;
 
 export const metadata = {
   title: `${p.title} · ${config.name}`,
@@ -34,23 +34,20 @@ export default function BookwisePage() {
       <ProjectHero
         title={p.title}
         category={p.category}
-        description={p.description}
+        description={p.description ?? p.summary}
         tags={p.tags}
         githubRepo={p.githubRepo}
+        liveUrl={p.liveUrl}
         year={p.year}
       />
 
-      <section className="pt-6 pb-2">
-        <p className="text-[11px] font-mono uppercase tracking-[0.2em] text-muted mb-2">
-          <span className="text-accent">$</span> ls ./walkthrough
-        </p>
-        <h2 className="font-serif-italic text-[34px] leading-tight text-fg">
-          A tour of BookWise
+      <section className="pb-10">
+        <h2 className="text-[24px] font-semibold tracking-tight text-fg">
+          A tour of Bookwise
         </h2>
-        <p className="mt-3 text-[15px] text-fg-soft max-w-[58ch]">
-          BookWise treats a library system the way it would actually ship in
-          production: approval-based onboarding, real role-based access, and
-          background jobs you can trust not to drop work.
+        <p className="mt-2 text-[15.5px] text-fg-soft max-w-[65ch]">
+          Approval-based sign-up, role-based access for admins, and background
+          jobs for email.
         </p>
       </section>
 
@@ -58,7 +55,7 @@ export default function BookwisePage() {
       <WalkthroughStep
         num="01"
         title="The reader-facing library"
-        blurb="The catalog members see after signing in: discoverable, filterable, and built for borrowing flows rather than browsing."
+        blurb="The catalog members see after signing in, with search, filters and borrowing."
       >
         <ShotFrame
           src="/Bookwise/library.png"
@@ -80,7 +77,7 @@ export default function BookwisePage() {
       <WalkthroughStep
         num="02"
         title="Admin dashboard"
-        blurb="A protected control surface for approving members, managing inventory, and watching borrow flows. Every route gated by role-based access control."
+        blurb="Where admins approve members, manage inventory and track borrowing. Every route checks the user's role."
       >
         <ImageSlider
           ariaLabel="Admin dashboard screenshots"
@@ -108,7 +105,7 @@ export default function BookwisePage() {
       <WalkthroughStep
         num="03"
         title="Email automation"
-        blurb="Transactional and scheduled emails flow through QStash with Nodemailer rendering. Status changes fire on save; overdue reminders are scheduled jobs that don't run on the request path."
+        blurb="Emails go out through QStash and Nodemailer. Status changes send an email right away; overdue reminders are scheduled jobs that stay off the request path."
       >
         <ImageSlider
           ariaLabel="Email templates"
@@ -133,8 +130,8 @@ export default function BookwisePage() {
       {/* 04 — Rate limiting */}
       <WalkthroughStep
         num="04"
-        title="Rate limiting at the edge"
-        blurb="A Redis-backed limiter sits in front of write endpoints, throttling per-IP and per-account to make brute-force and scrape attempts uneconomical."
+        title="Rate limiting"
+        blurb="A Redis-backed limiter in front of write endpoints throttles each IP and account to slow down brute-force and scraping."
       >
         <ShotFrame
           src="/Bookwise/rateLimit.png"

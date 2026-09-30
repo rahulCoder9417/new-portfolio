@@ -6,7 +6,7 @@ import { SyncedVideos } from "@/components/project/SyncedVideos";
 import { DemoVideo } from "@/components/project/DemoVideo";
 import { FullBleed } from "@/components/project/FullBleed";
 
-const p = config.FeaturedProject;
+const p = config.projects.devsync;
 
 export const metadata = {
   title: `${p.title} · ${config.name}`,
@@ -25,22 +25,6 @@ const tech = (items: string[]) => (
   </ul>
 );
 
-const features = (items: { title: string; desc: string }[]) => (
-  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-    {items.map((f) => (
-      <li
-        key={f.title}
-        className="border border-[color:var(--border)] rounded-md p-4 bg-bg-soft hover:border-accent transition-colors"
-      >
-        <p className="text-[13px] font-mono uppercase tracking-[0.12em] text-fg mb-1.5">
-          <span className="text-accent">›</span> {f.title}
-        </p>
-        <p className="text-[13px] leading-relaxed text-fg-soft">{f.desc}</p>
-      </li>
-    ))}
-  </ul>
-);
-
 const detail = (body: React.ReactNode) => (
   <div className="rounded-md border border-[color:var(--border)] bg-bg-soft/60 px-5 py-4 text-[14px] leading-[1.78] text-fg-soft">
     {body}
@@ -53,25 +37,22 @@ export default function DevSyncPage() {
       <ProjectHero
         title={p.title}
         category={p.category}
-        description={p.description}
+        description={p.description ?? p.summary}
         tags={p.tags}
         githubRepo={p.githubRepo}
-        liveUrl="https://dev-sync-blush.vercel.app/"
+        liveUrl={p.liveUrl}
         year={p.year}
       />
 
       {/* Walkthrough intro */}
-      <section className="pt-6 pb-2">
-        <p className="text-[11px] font-mono uppercase tracking-[0.2em] text-muted mb-2">
-          <span className="text-accent">$</span> ls ./walkthrough
-        </p>
-        <h2 className="font-serif-italic text-[34px] leading-tight text-fg">
+      <section className="pb-10">
+        <h2 className="text-[24px] font-semibold tracking-tight text-fg">
           How DevSync works
         </h2>
-        <p className="mt-3 text-[15px] text-fg-soft max-w-[58ch]">
-          Seven slices of the collaborative core. Each pair of videos plays in
-          lockstep so you can see the same action from the host and the peer at
-          the same instant.
+        <p className="mt-2 text-[15.5px] text-fg-soft max-w-[65ch]">
+          Seven parts of the app. The paired videos play in sync, so you see
+          the same action from the host&apos;s screen and a peer&apos;s screen
+          at the same moment. Hover a video to speed it up.
         </p>
       </section>
 
@@ -79,7 +60,7 @@ export default function DevSyncPage() {
       <WalkthroughStep
         num="01"
         title="Real-time code syncing"
-        blurb="Two users editing the same file. Keystrokes, cursors, and selections propagate over WebSockets backed by Yjs CRDTs — no refreshes, no locks, no merge prompts."
+        blurb="Two users editing the same file. Keystrokes, cursors and selections travel over WebSockets as Yjs CRDT updates, so there are no locks and no merge conflicts."
       >
         <FullBleed max="1700px">
           <SyncedVideos
@@ -92,27 +73,21 @@ export default function DevSyncPage() {
         {detail(
           <>
             <p>
-              The synchronization engine is the foundation of DevSync. Multiple
-              users edit the same file in parallel with consistent, conflict-free
-              document state. Cursor positions, selections, and scroll state are
-              continuously synced alongside the content itself.
+              Each file is a Yjs document. Every client applies the same
+              updates and ends up with the same text, whatever order the
+              updates arrive in. Cursor positions and selections sync
+              alongside the content.
             </p>
           </>,
         )}
-        {features([
-          { title: "Code streaming", desc: "Modifications stream instantly to all connected clients as users type." },
-          { title: "Context preservation", desc: "Cursors, selections, and scroll continuously synchronized across peers." },
-          { title: "Parallel editing", desc: "Multiple users work the same buffer with automatic conflict resolution." },
-          { title: "Zero latency", desc: "Propagation without manual refreshes or coordination overhead." },
-        ])}
-        {tech(["WebSocket", "Yjs", "CRDT", "Operational Transform"])}
+        {tech(["WebSocket", "Yjs", "CRDT"])}
       </WalkthroughStep>
 
       {/* 02 — Terminal */}
       <WalkthroughStep
         num="02"
         title="Integrated terminal execution"
-        blurb="A real shell wired into a per-room Docker container. Install dependencies, run a dev server, ship a static site — same workflow as a local machine."
+        blurb="A real shell connected to the room's Docker container. Install dependencies, run a dev server or serve a static site, the same way you would locally."
       >
         <FullBleed max="1700px">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -122,10 +97,9 @@ export default function DevSyncPage() {
         </FullBleed>
         {detail(
           <p>
-            The terminal is a full pseudo-tty connected to the room&apos;s
-            isolated container. Commands run with real exit codes; long-lived
-            processes (dev servers, watchers, build pipelines) keep running as
-            users disconnect and reconnect.
+            The terminal is a pseudo-terminal attached to the room&apos;s
+            container. Long-running processes such as dev servers and watchers
+            keep running when users disconnect and reconnect.
           </p>,
         )}
         {tech(["Docker", "PTY", "WebSocket", "Express"])}
@@ -135,7 +109,7 @@ export default function DevSyncPage() {
       <WalkthroughStep
         num="03"
         title="File system synchronization"
-        blurb="Create, rename, move, delete — file operations on either side propagate to every connected peer, with the tree state derived from a single authoritative event log."
+        blurb="Creating, renaming, moving or deleting a file on one screen shows up for every connected peer."
       >
         <FullBleed max="1700px">
           <SyncedVideos
@@ -147,55 +121,53 @@ export default function DevSyncPage() {
         </FullBleed>
         {detail(
           <p>
-            File-tree mutations are broadcast as discrete events. Peers apply
-            them deterministically, so the explorer view stays consistent even
-            when several users restructure folders at the same time.
+            File-tree changes are broadcast as events and every peer applies
+            them in the same order, so the explorer stays the same for everyone
+            even when several people move folders at once.
           </p>,
         )}
-        {tech(["WebSocket", "Event log", "Yjs awareness"])}
+        {tech(["WebSocket", "Yjs"])}
       </WalkthroughStep>
 
       {/* 04 — GUI Execution */}
       <WalkthroughStep
         num="04"
         title="GUI execution"
-        blurb="GUI applications (Tkinter, simple X11 apps) run inside the container on a virtual display and stream their framebuffer back into the browser."
+        blurb="GUI programs such as Tkinter apps run inside the container on a virtual display, and their window is streamed back to the browser."
       >
         <DemoVideo src={`${V}/TerminalGui1.mp4`} caption="tkinter app inside the container" />
         {detail(
           <p>
-            A virtual framebuffer (Xvfb) provides the X11 display; a screen
-            relay pipes frames into a canvas in the browser. The user-facing
-            terminal stays focused on the shell while the GUI window renders
-            alongside.
+            Xvfb provides a virtual X11 display inside the container, and its
+            frames are relayed to a canvas in the browser, next to the
+            terminal.
           </p>,
         )}
-        {tech(["Xvfb", "X11", "VNC relay", "Docker"])}
+        {tech(["Xvfb", "X11", "Docker"])}
       </WalkthroughStep>
 
       {/* 05 — Live Preview */}
       <WalkthroughStep
         num="05"
         title="Live preview"
-        blurb="Boot a dev server in the terminal and a preview pane attaches automatically via a reverse-proxied port forward."
+        blurb="Start a dev server in the terminal and a preview pane opens through a reverse proxy."
       >
         <DemoVideo src={`${V}/TerminalPreview1.mp4`} caption="dev server preview" />
         {detail(
           <p>
-            DevSync watches the container&apos;s exposed ports. The first one to
-            answer health checks gets wired to a side-pane iframe served through
-            a per-room subdomain, so the preview survives reloads and is
-            shareable.
+            The container&apos;s port is exposed through a reverse proxy and
+            shown in a side pane, so everyone in the room sees the running
+            app.
           </p>,
         )}
-        {tech(["Reverse proxy", "Port forwarding", "Health checks"])}
+        {tech(["Reverse proxy", "Port forwarding"])}
       </WalkthroughStep>
 
       {/* 06 — Team Chat */}
       <WalkthroughStep
         num="06"
         title="Built-in team chat"
-        blurb="Lightweight chat panel that rides the same WebSocket the editor uses — messages, system events, and presence sit on one channel."
+        blurb="A chat panel next to the editor, running on the same WebSocket connection."
       >
         <SyncedVideos
           srcA={`${V}/3Sharing.mp4`}
@@ -205,9 +177,9 @@ export default function DevSyncPage() {
         />
         {detail(
           <p>
-            Chat lives on the same realtime transport as the editor, so there
-            is no second connection to manage. Presence (who is online, who is
-            typing) is part of the same Yjs awareness state.
+            Chat uses the same connection as the editor, so there is no second
+            socket to manage. Presence (who is online, who is typing) comes
+            from Yjs awareness.
           </p>,
         )}
         {tech(["WebSocket", "Yjs awareness"])}
@@ -217,17 +189,16 @@ export default function DevSyncPage() {
       <WalkthroughStep
         num="07"
         title="Git repository import"
-        blurb="Paste a Git URL and the container clones the repo, restores history, and drops you into the editor with the working tree ready."
+        blurb="Paste a Git URL and the container clones the repository with its history and opens it in the editor."
       >
         <DemoVideo src={`${V}/gitClone.mp4`} caption="git clone inside the room" />
         {detail(
           <p>
-            Imports happen inside the room&apos;s container with full git
-            history. Once the clone finishes the file tree refreshes and any
-            connected peers see the new files appear in real time.
+            The clone runs inside the room&apos;s container. When it finishes,
+            the file tree refreshes for everyone in the room.
           </p>,
         )}
-        {tech(["Git", "Docker", "Reverse proxy"])}
+        {tech(["Git", "Docker"])}
       </WalkthroughStep>
 
       <ProjectFooter githubRepo={p.githubRepo} />

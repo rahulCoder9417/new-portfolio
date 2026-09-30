@@ -12,7 +12,7 @@ function shadeClass(count: number) {
   if (count === 1) return "bg-accent/30";
   if (count === 2) return "bg-accent/60";
   if (count === 3) return "bg-accent/85";
-  return "bg-accent shadow-[0_0_8px_var(--accent-soft)]";
+  return "bg-accent";
 }
 
 const MONTH_NAMES = [
@@ -79,7 +79,6 @@ export function GitHubHeatmap() {
     return () => { cancelled = true; };
   }, []);
 
-  const totalDays = config.gitMonths * 30 + 1;
   const groups = useMemo(() => buildMonthGroups(commits), [commits]);
 
   // Cell size: clamps so 6 months fit without horizontal scroll on common viewports
@@ -89,33 +88,27 @@ export function GitHubHeatmap() {
     height: "clamp(18px, 2.4vw, 30px)",
   };
 
+  if (errored || (!loading && commits.length === 0)) return null;
+
   return (
-    <section className="py-20 border-t border-[color:var(--border)]">
+    <section className="py-16 border-t border-[color:var(--border)]">
       <SectionHeader
-        num="04"
-        path="github"
         right={
           <a
             href={config.githubProfile}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-accent transition-colors"
+            className="nav-link"
           >
             @{config.githubUsername} ↗
           </a>
         }
       >
-        {totalDays} days of commits
+        GitHub activity
       </SectionHeader>
 
       {loading ? (
-        <p className="text-sm font-mono text-muted">
-          <span className="text-accent">$</span> git log --since=&quot;{config.gitMonths} months ago&quot;<span className="caret" />
-        </p>
-      ) : errored || commits.length === 0 ? (
-        <p className="text-sm font-mono text-muted">
-          <span className="text-accent">$</span> echo $GITHUB_TOKEN <span className="text-muted/60"># (not set, heatmap hidden)</span>
-        </p>
+        <p className="text-[13.5px] text-muted">Loading contributions…</p>
       ) : (
         <FullBleed max="1100px">
           {/* Horizontal scroll only kicks in on very narrow viewports */}
@@ -123,7 +116,7 @@ export function GitHubHeatmap() {
             <div className="flex items-end gap-4 w-fit mx-auto">
               {groups.map((g) => (
                 <div key={g.key} className="flex flex-col gap-2">
-                  <span className="text-[11px] font-mono uppercase tracking-[0.18em] text-muted px-0.5">
+                  <span className="text-[12px] text-muted px-0.5">
                     {g.label}
                   </span>
                   <div className="flex gap-[3px]">
@@ -134,7 +127,7 @@ export function GitHubHeatmap() {
                             <div
                               key={di}
                               title={`${d.count} commit${d.count === 1 ? "" : "s"} · ${d.date}`}
-                              className={`rounded-[4px] ${shadeClass(d.count)} hover:scale-125 transition-transform`}
+                              className={`rounded-[3px] ${shadeClass(d.count)}`}
                               style={cellStyle}
                             />
                           ) : (
@@ -149,9 +142,9 @@ export function GitHubHeatmap() {
             </div>
           </div>
 
-          <div className="mt-8 flex items-center justify-between text-[11px] font-mono text-muted uppercase tracking-[0.12em]">
+          <div className="mt-6 flex items-center justify-between text-[12.5px] text-muted">
             <div className="flex items-center gap-2">
-              <span>less</span>
+              <span>Less</span>
               <div className="flex gap-0.5">
                 <div className="h-2.5 w-2.5 rounded-[2px] bg-[color:var(--border)]" />
                 <div className="h-2.5 w-2.5 rounded-[2px] bg-accent/30" />
@@ -159,13 +152,11 @@ export function GitHubHeatmap() {
                 <div className="h-2.5 w-2.5 rounded-[2px] bg-accent/85" />
                 <div className="h-2.5 w-2.5 rounded-[2px] bg-accent" />
               </div>
-              <span>more</span>
+              <span>More</span>
             </div>
             <span>
-              total{" "}
-              <span className="text-fg tabular-nums normal-case text-[13px]">
-                {totalCommits.toLocaleString()}
-              </span>
+              <span className="text-fg tabular-nums">{totalCommits.toLocaleString()}</span>{" "}
+              contributions in the last {config.gitMonths} months
             </span>
           </div>
         </FullBleed>

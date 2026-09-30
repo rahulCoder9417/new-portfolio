@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Github, Globe } from "lucide-react";
+import { githubUrl } from "@/utils/config";
 
 type Props = {
   title: string;
@@ -8,7 +8,9 @@ type Props = {
   tags: string[];
   githubRepo?: string;
   liveUrl?: string;
+  liveLabel?: string;
   year?: string;
+  status?: string;
 };
 
 export function ProjectHero({
@@ -18,37 +20,33 @@ export function ProjectHero({
   tags,
   githubRepo,
   liveUrl,
+  liveLabel,
   year,
+  status,
 }: Props) {
   return (
-    <section className="pt-20 pb-14">
-      <Link
-        href="/#projects"
-        className="text-[11px] font-mono uppercase tracking-[0.16em] text-muted hover:text-accent transition-colors inline-flex items-center gap-1.5"
-      >
-        ← back to selected
+    <section className="pt-12 pb-12">
+      <Link href="/#projects" className="text-[13.5px] nav-link">
+        ← All projects
       </Link>
 
-      <div className="mt-10 flex items-start justify-between gap-4">
-        <div>
-          <p className="text-[11px] font-mono text-muted uppercase tracking-[0.16em] mb-3">
-            <span className="text-accent">$</span> cat ./{title.toLowerCase()}.md
-          </p>
-          <h1 className="font-serif-italic text-[clamp(2.4rem,7vw,3.6rem)] leading-[1.02] text-fg">
-            {title}.
-          </h1>
-          <p className="mt-3 text-[12px] font-mono text-muted uppercase tracking-[0.14em]">
-            {category}
-          </p>
-        </div>
-        {year && (
-          <span className="text-[11px] font-mono text-muted whitespace-nowrap pt-2">
-            {year}
-          </span>
-        )}
+      <div className="mt-10 flex items-baseline justify-between gap-4">
+        <h1 className="text-[34px] font-semibold tracking-tight leading-tight text-fg">
+          {title}
+        </h1>
+        {year && <span className="text-[13.5px] text-muted tabular-nums">{year}</span>}
       </div>
+      <p className="mt-1 text-[15px] text-muted">
+        {category}
+        {status && (
+          <>
+            {" · "}
+            <span className="text-fg-soft">{status}</span>
+          </>
+        )}
+      </p>
 
-      <p className="mt-9 text-[15.5px] leading-[1.78] text-fg-soft max-w-[60ch] whitespace-pre-line">
+      <p className="mt-8 text-[16px] leading-[1.75] text-fg-soft max-w-[65ch] whitespace-pre-line">
         {description}
       </p>
 
@@ -58,29 +56,20 @@ export function ProjectHero({
         ))}
       </ul>
 
-      <div className="mt-7 flex flex-wrap items-center gap-5 text-[12px] font-mono">
-        {githubRepo && (
-          <a
-            href={`https://github.com/rahulCoder9417/${githubRepo}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 prose-link text-fg-soft"
-          >
-            <Github size={12} /> code
-          </a>
-        )}
-        {liveUrl && (
-          <a
-            href={liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 prose-link text-fg-soft"
-          >
-            <Globe size={12} /> live demo
-            <ArrowUpRight size={11} />
-          </a>
-        )}
-      </div>
+      {(githubRepo || liveUrl) && (
+        <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-[14px]">
+          {liveUrl && (
+            <a href={liveUrl} target="_blank" rel="noopener noreferrer" className="text-link">
+              {liveLabel ?? "Live site"} ↗
+            </a>
+          )}
+          {githubRepo && (
+            <a href={githubUrl(githubRepo)} target="_blank" rel="noopener noreferrer" className="text-link">
+              Source code ↗
+            </a>
+          )}
+        </div>
+      )}
     </section>
   );
 }

@@ -3,30 +3,21 @@ import { SectionHeader } from "./SectionHeader";
 
 export function Contact() {
   return (
-    <section id="contact" className="py-20 border-t border-[color:var(--border)]">
-      <SectionHeader num="06" path="contact">
-        Let&apos;s talk
-      </SectionHeader>
+    <section id="contact" className="py-16 border-t border-[color:var(--border)] scroll-mt-14">
+      <SectionHeader>Contact</SectionHeader>
 
-      <p className="text-[15.5px] leading-[1.78] text-fg-soft mb-9 max-w-[60ch]">
-        I&apos;m open to{" "}
-        <span className="font-serif-italic text-fg">interesting work</span>:
-        full-time roles, freelance, or just a good conversation about systems
-        and frontend craft.
+      <p className="text-[15.5px] leading-[1.75] text-fg-soft mb-6 max-w-[60ch]">
+        I&apos;m open to full-time roles and freelance projects. Email is the
+        fastest way to reach me.
       </p>
 
-      <ul className="space-y-3">
+      <ul className="space-y-2.5">
         {config.primaryContact.map((c) => {
           const Icon = c.icon;
           return (
-            <li key={c.href} className="flex items-center gap-3">
-              <Icon size={15} className="text-accent shrink-0" />
-              <a
-                href={c.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="prose-link text-fg"
-              >
+            <li key={c.href} className="flex items-center gap-3 text-[15px]">
+              <Icon size={15} className="text-muted shrink-0" />
+              <a href={c.href} target="_blank" rel="noopener noreferrer" className="text-link">
                 {c.label}
               </a>
             </li>
@@ -34,15 +25,10 @@ export function Contact() {
         })}
       </ul>
 
-      <ul className="mt-10 flex flex-wrap gap-x-5 gap-y-2 text-[11px] font-mono text-muted uppercase tracking-[0.14em]">
+      <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-[13.5px] text-muted">
         {config.secondaryContact.map((c) => (
           <li key={c.href}>
-            <a
-              href={c.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-accent transition-colors"
-            >
+            <a href={c.href} target="_blank" rel="noopener noreferrer" className="nav-link">
               {c.label} ↗
             </a>
           </li>

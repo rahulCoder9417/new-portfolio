@@ -5,44 +5,39 @@ export function LeetCodeStats() {
   const { solved, easy, medium, hard, beats } = config.leetCodeStats;
   const total = easy + medium + hard;
   const buckets = [
-    { label: "easy", value: easy, color: "var(--accent)" },
+    { label: "easy", value: easy, color: "#10b981" },
     { label: "medium", value: medium, color: "#f59e0b" },
     { label: "hard", value: hard, color: "#ef4444" },
   ];
 
   return (
-    <section className="py-20 border-t border-[color:var(--border)]">
+    <section className="py-16 border-t border-[color:var(--border)]">
       <SectionHeader
-        num="05"
-        path="leetcode"
         right={
           <a
             href={config.leetCodeProfile}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-accent transition-colors"
+            className="nav-link"
           >
-            profile ↗
+            Profile ↗
           </a>
         }
       >
-        Daily DSA, mostly medium
+        LeetCode
       </SectionHeader>
 
       <div className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-x-10 gap-y-8 items-start">
         <div className="flex flex-col gap-2.5">
-          <div className="flex items-baseline gap-3">
-            <span className="font-serif-italic text-[64px] leading-none text-fg">
+          <div className="flex items-baseline gap-2">
+            <span className="text-[40px] font-semibold tracking-tight leading-none text-fg tabular-nums">
               {solved}
             </span>
-            <span className="text-[11px] font-mono text-muted uppercase tracking-[0.16em]">
-              problems<br />solved
-            </span>
+            <span className="text-[13.5px] text-muted">problems solved</span>
           </div>
-          <div className="inline-flex items-center gap-2 text-[11px] font-mono text-accent uppercase tracking-[0.16em] border border-[color:var(--border)] bg-[color:var(--accent-soft)] rounded px-2.5 py-1 self-start">
-            <span>beats</span>
-            <span className="text-fg tabular-nums normal-case">{beats}%</span>
-          </div>
+          <p className="text-[13.5px] text-muted">
+            Beats <span className="text-fg tabular-nums">{beats}%</span>
+          </p>
         </div>
 
         <ul className="space-y-3.5">
@@ -53,7 +48,7 @@ export function LeetCodeStats() {
                 key={b.label}
                 className="grid grid-cols-[70px_1fr_auto_auto] items-center gap-3"
               >
-                <span className="text-[11px] text-muted font-mono uppercase tracking-[0.12em]">
+                <span className="text-[13px] text-muted capitalize">
                   {b.label}
                 </span>
                 <div className="h-1.5 rounded-full bg-[color:var(--border)] overflow-hidden">
@@ -66,10 +61,10 @@ export function LeetCodeStats() {
                     }}
                   />
                 </div>
-                <span className="text-[11px] font-mono text-muted tabular-nums">
+                <span className="text-[12px] text-muted tabular-nums">
                   {pct.toFixed(0)}%
                 </span>
-                <span className="text-[12px] font-mono text-fg-soft tabular-nums w-7 text-right">
+                <span className="text-[13px] text-fg-soft tabular-nums w-7 text-right">
                   {b.value}
                 </span>
               </li>

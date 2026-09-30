@@ -80,7 +80,7 @@ export function ImageSlider({ slides, ariaLabel }: Props) {
         </div>
 
         {/* Counter chip */}
-        <div className="absolute top-3 left-3 z-10 text-[10px] font-mono uppercase tracking-[0.18em] text-muted bg-bg/85 backdrop-blur px-2 py-1 rounded">
+        <div className="absolute top-3 left-3 z-10 text-[11px] font-mono text-muted bg-bg/85 backdrop-blur px-2 py-1 rounded">
           <span className="text-fg tabular-nums">{String(idx + 1).padStart(2, "0")}</span>
           <span className="text-muted/60"> / </span>
           <span className="tabular-nums">{String(count).padStart(2, "0")}</span>
@@ -93,7 +93,7 @@ export function ImageSlider({ slides, ariaLabel }: Props) {
               type="button"
               onClick={prev}
               aria-label="Previous slide"
-              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 h-9 w-9 rounded-full bg-bg/85 backdrop-blur border border-[color:var(--border)] text-fg-soft hover:text-accent hover:border-accent transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 h-9 w-9 rounded-full bg-bg/85 backdrop-blur border border-[color:var(--border)] text-fg-soft hover:text-fg hover:border-[color:var(--line)] transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
             >
               <ChevronLeft size={16} />
             </button>
@@ -101,7 +101,7 @@ export function ImageSlider({ slides, ariaLabel }: Props) {
               type="button"
               onClick={next}
               aria-label="Next slide"
-              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 h-9 w-9 rounded-full bg-bg/85 backdrop-blur border border-[color:var(--border)] text-fg-soft hover:text-accent hover:border-accent transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 h-9 w-9 rounded-full bg-bg/85 backdrop-blur border border-[color:var(--border)] text-fg-soft hover:text-fg hover:border-[color:var(--line)] transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
             >
               <ChevronRight size={16} />
             </button>
@@ -111,7 +111,7 @@ export function ImageSlider({ slides, ariaLabel }: Props) {
 
       {/* Bottom rail: caption + dots */}
       <div className="mt-3 flex items-center justify-between gap-4">
-        <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-muted min-h-[1em]">
+        <p className="text-[13px] text-muted min-h-[1em]">
           {current.caption ?? ""}
         </p>
         {count > 1 && (
@@ -125,7 +125,7 @@ export function ImageSlider({ slides, ariaLabel }: Props) {
                 onClick={() => setIdx(i)}
                 className={`h-1.5 rounded-full transition-all ${
                   i === idx
-                    ? "w-6 bg-accent"
+                    ? "w-6 bg-fg"
                     : "w-1.5 bg-[color:var(--border)] hover:bg-fg-soft"
                 }`}
               />

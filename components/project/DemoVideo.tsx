@@ -106,16 +106,14 @@ export function DemoVideo({
             className="w-full aspect-video object-cover"
           />
         ) : (
-          <div className="w-full aspect-video flex items-center justify-center text-[11px] font-mono text-muted">
-            <span className="text-accent">$</span>&nbsp;waiting for viewport…
-          </div>
+          <div className="w-full aspect-video" />
         )}
         {hoverSpeedUp && (
           <SpeedChip rate={rate} visible={rate > 1} />
         )}
       </div>
       {caption && (
-        <p className="mt-2 text-[11px] font-mono uppercase tracking-[0.14em] text-muted">
+        <p className="mt-2 text-[13px] text-muted">
           {caption}
         </p>
       )}
@@ -126,7 +124,7 @@ export function DemoVideo({
 function SpeedChip({ rate, visible }: { rate: number; visible: boolean }) {
   return (
     <div
-      className={`pointer-events-none absolute bottom-3 right-3 z-10 flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.18em] text-fg bg-bg/85 backdrop-blur border border-[color:var(--border)] px-2.5 py-1.5 rounded transition-all duration-200 ${
+      className={`pointer-events-none absolute bottom-3 right-3 z-10 flex items-center gap-2 text-[11px] font-mono text-fg bg-bg/85 backdrop-blur border border-[color:var(--border)] px-2.5 py-1.5 rounded transition-all duration-200 ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
       }`}
     >

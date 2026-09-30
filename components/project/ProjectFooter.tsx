@@ -1,20 +1,15 @@
 import Link from "next/link";
-import { Github } from "lucide-react";
+import { githubUrl } from "@/utils/config";
 
 export function ProjectFooter({ githubRepo }: { githubRepo?: string }) {
   return (
-    <footer className="py-10 border-t border-[color:var(--border)] mt-10 flex items-center justify-between text-xs text-muted">
-      <Link href="/" className="hover:text-fg transition-colors">
-        ← back to home
+    <footer className="py-10 border-t border-[color:var(--border)] mt-10 flex items-center justify-between text-[13.5px]">
+      <Link href="/#projects" className="nav-link">
+        ← All projects
       </Link>
       {githubRepo && (
-        <a
-          href={`https://github.com/rahulCoder9417/${githubRepo}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 hover:text-fg transition-colors"
-        >
-          <Github size={12} /> {githubRepo}
+        <a href={githubUrl(githubRepo)} target="_blank" rel="noopener noreferrer" className="nav-link">
+          Source on GitHub ↗
         </a>
       )}
     </footer>

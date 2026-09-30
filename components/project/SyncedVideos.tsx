@@ -147,8 +147,8 @@ export function SyncedVideos({
           key={v.label}
           className="relative rounded-md overflow-hidden border border-[color:var(--border)] bg-bg-soft"
         >
-          <div className="absolute top-2.5 left-2.5 z-10 text-[10px] font-mono uppercase tracking-[0.18em] text-muted bg-bg/85 backdrop-blur px-2 py-1 rounded">
-            <span className="text-accent">●</span> {v.label}
+          <div className="absolute top-2.5 left-2.5 z-10 text-[12px] text-fg-soft bg-bg/85 backdrop-blur px-2 py-1 rounded">
+            {v.label}
           </div>
           {armed ? (
             <video
@@ -161,15 +161,13 @@ export function SyncedVideos({
               className="w-full aspect-video object-cover"
             />
           ) : (
-            <div className="w-full aspect-video flex items-center justify-center text-[11px] font-mono text-muted">
-              <span className="text-accent">$</span>&nbsp;waiting for viewport…
-            </div>
+            <div className="w-full aspect-video" />
           )}
         </div>
       ))}
       {hoverSpeedUp && (
         <div
-          className={`pointer-events-none absolute bottom-3 right-3 z-10 flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.18em] text-fg bg-bg/85 backdrop-blur border border-[color:var(--border)] px-2.5 py-1.5 rounded transition-all duration-200 ${
+          className={`pointer-events-none absolute bottom-3 right-3 z-10 flex items-center gap-2 text-[11px] font-mono text-fg bg-bg/85 backdrop-blur border border-[color:var(--border)] px-2.5 py-1.5 rounded transition-all duration-200 ${
             rate > 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
           }`}
         >
@@ -186,7 +184,6 @@ export function SyncedVideos({
               </span>
             ))}
           </span>
-          <span className="text-muted/60">· sync</span>
         </div>
       )}
     </div>
