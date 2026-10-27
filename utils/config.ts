@@ -24,12 +24,12 @@ const textcrew: Project = {
   slug: "Textcrew",
   year: "2026",
   category: "Personal AI agent platform",
-  status: "Pre-launch",
+  status: "Live",
   summary:
-    "A personal AI agent you text on WhatsApp, Telegram or iMessage. Each user's agent runs in its own gVisor sandbox and does real work in their apps. I designed the system and built the backend and the Go container manager.",
+    "A personal AI agent you text on Telegram or the web app. A lead agent splits each job and calls in specialist agents for code, pull request reviews and research. Each user's agent runs in its own gVisor sandbox. I designed the system and built the backend and the Go container manager.",
   description:
-    "Textcrew is a messaging-first personal assistant. Each user talks to their own AI agent on WhatsApp, Telegram, iMessage or the web app. The agent runs in its own sandboxed container, works in about 25 apps (Gmail, Calendar, Notion, Slack, GitHub and others) through Composio, asks before risky actions, remembers the user, runs reminders and automations, and is billed in credits.\n\nI did the system design and backend engineering: the architecture, the API contract, the backend (api + worker) and the Go service that manages every user's container.",
-  imageUrl: "/Textcrew-Main.png",
+    "Textcrew is a messaging-first personal assistant, live on the web and Telegram. Each user texts Tex, their own AI agent. Tex splits the job into steps and calls in specialists when they fit: Byte writes code, Patch reviews pull requests and Scout searches the web. The crew works in the user's apps (Gmail, GitHub, Google Calendar, Google Docs and more), asks before anything risky, runs automations, and is billed in credits, or users bring their own Claude plan or API key.\n\nI did the system design and backend engineering: the architecture, the API contract, the backend (api + worker) and the Go service that manages every user's container.",
+  imageUrl: "/Textcrew-Main.jpg",
   liveUrl: "https://textcrew.in",
   liveLabel: "textcrew.in",
   tags: ["TypeScript", "Go", "gRPC", "MCP", "BullMQ", "gVisor"],
@@ -46,7 +46,6 @@ const devsync: Project = {
     "DevSync lets a team open the same project in the browser and work on it together. Edits, cursors and selections sync through Yjs CRDTs over WebSockets, and every room runs in its own Docker container, so the terminal, dev servers and even Tkinter apps behave like they would on a local machine. Project state is saved, so a room can be picked up again later.",
   imageUrl: "/DevSync-Main.png",
   githubRepo: "dev-sync",
-  liveUrl: "https://dev-sync-blush.vercel.app/",
   highlights: [
     "Up to 15 people editing the same repository at once through Yjs CRDTs over WebSockets, with cursor and selection sync.",
     "Collaboration (WebSocket, CRDT sync, presence) runs as its own service, separate from persistence and code execution, so each part scales on its own.",
@@ -125,7 +124,7 @@ const newtube: Project = {
 export const config = {
   // ─── Personal ──────────────────────────────────────────────
   name: "Rahul Kumar",
-  title: "Software Engineer",
+  title: "AI Software Engineer",
   freelanceTagline: "Available for freelance work",
   location: "Chandigarh, India",
   resumePath: "/Resume.pdf",
@@ -133,15 +132,15 @@ export const config = {
 
   // ─── SEO / Metadata ───────────────────────────────────────
   seo: {
-    title: "Rahul Kumar · Software Engineer",
+    title: "Rahul Kumar · AI Software Engineer",
     description:
-      "Software engineer building backends, AI agents and the infrastructure they run on, in TypeScript, Go and Rust. Open to freelance work.",
+      "AI software engineer building scalable backends, machine learning systems and AI agents in TypeScript, Python, Go and Rust. Open to freelance work.",
   },
 
   // ─── Hero ──────────────────────────────────────────────────
   hero: {
     intro:
-      "I build backends and the systems around them: APIs, job queues, AI agents, and the infrastructure they run on. Most of my work is in TypeScript, Go and Postgres, with Rust on the side.",
+      "I build scalable backends, machine learning systems and AI agents, and the infrastructure they run on. Most of my work is in TypeScript, Python, Go and Rust.",
   },
 
   // ─── Navigation ────────────────────────────────────────────
@@ -155,12 +154,12 @@ export const config = {
   // ─── About ─────────────────────────────────────────────────
   about: {
     age: 19,
-    status: "BCA Student",
     open_to_work: true,
     bio: [
-      "I'm a software engineer and BCA student. I like owning a feature from the database schema to the UI, and the part I care about most is the backend: data models, queues, retries, and what happens when something fails.",
-      "At InboxKit I build the Enrich platform: the Next.js frontend, services in Go and Node, and ClickHouse analytics over 300M+ records. I write raw SQL when an ORM gets in the way.",
-      "A lot of my recent work is AI agents. I build on the Claude API and MCP, and Claude Code is part of how I work every day: I break a design into phases and run parallel agents on separate git branches. I also build RAG pipelines and agent workflows with LangChain and LangGraph.",
+      "I'm an AI software engineer. I work on three things: backends that hold up under load, the machine learning underneath AI features, and agents that do real work. I like owning a feature from the database schema to the UI, and the part I care about most is the backend: data models, queues, retries, and what happens when something fails.",
+      "At InboxKit I build the Enrich platform: the Next.js frontend, services in Go and Node, and ClickHouse analytics over 300M+ records. Keeping it fast as the data grows means partitioned tables, Redis caching in front of heavy queries, and job queues with retries, backoff and rate limits. I write raw SQL when an ORM gets in the way.",
+      "On the ML side I work in Python: preparing data, training and evaluating models with PyTorch and scikit-learn, and using embeddings and vector search for retrieval. I want to know what the model is doing, not only which API to call.",
+      "A lot of my recent work is agentic AI. I build on the Claude API and MCP: agents that call tools, ask before risky actions and remember the user, like Textcrew. I build RAG pipelines and multi-agent workflows with LangChain and LangGraph, and Claude Code is part of how I work every day: I break a design into phases and run parallel agents on separate git branches.",
       "For operations I run services in Docker and set up monitoring with Prometheus, Grafana, Loki and Tempo, so metrics, logs and traces are in one place.",
       "Outside work I write systems code to see how things work underneath: a Redis-compatible server in Go, and a thread-pool web server and a small 3D renderer in Rust.",
     ],
@@ -169,10 +168,11 @@ export const config = {
   // ─── Tech Stack ────────────────────────────────────────────
   techStack: {
     categories: [
-      { label: "Languages", items: ["TypeScript", "JavaScript", "Go", "Rust", "Python", "SQL"] },
+      { label: "Languages", items: ["TypeScript", "Python", "Go", "Rust", "JavaScript", "SQL"] },
       { label: "Frontend", items: ["Next.js", "React", "Redux Toolkit", "Tailwind CSS", "shadcn/ui"] },
-      { label: "Backend", items: ["Node.js", "Hono", "Express", "Fastify", "Fiber", "Echo", "gRPC", "WebSockets", "OpenAPI"] },
-      { label: "AI & agents", items: ["Claude API", "Claude Code", "MCP", "LangChain", "LangGraph", "RAG", "LiteLLM"] },
+      { label: "Backend", items: ["Node.js", "Hono", "Express", "Fastify", "FastAPI", "Fiber", "Echo", "gRPC", "WebSockets", "OpenAPI"] },
+      { label: "Machine learning", items: ["PyTorch", "scikit-learn", "NumPy", "pandas", "Hugging Face Transformers", "Jupyter"] },
+      { label: "AI & agents", items: ["Claude API", "Claude Code", "MCP", "LangChain", "LangGraph", "RAG", "Embeddings", "Qdrant", "Chroma", "LiteLLM"] },
       { label: "Data", items: ["PostgreSQL", "ClickHouse", "MongoDB", "Redis", "BullMQ", "Drizzle", "Prisma"] },
       { label: "DevOps", items: ["Docker", "gVisor", "GitHub Actions", "Caddy", "AWS SES"] },
       { label: "Observability", items: ["Prometheus", "Grafana", "Loki", "Tempo"] },

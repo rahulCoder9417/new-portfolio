@@ -27,7 +27,11 @@ export function Hero() {
           <Link href="/projects/Textcrew" className="text-link">
             Textcrew
           </Link>
-          , a personal AI agent you talk to on WhatsApp, Telegram or iMessage.
+          , a personal AI agent you text on Telegram or the web. It&apos;s live at{" "}
+          <a href="https://textcrew.in" target="_blank" rel="noopener noreferrer" className="text-link">
+            textcrew.in
+          </a>
+          .
         </p>
       </div>
 

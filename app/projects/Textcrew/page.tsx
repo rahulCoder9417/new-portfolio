@@ -2,7 +2,6 @@ import { config } from "@/utils/config";
 import { ProjectHero } from "@/components/project/ProjectHero";
 import { ProjectSection } from "@/components/project/ProjectSection";
 import { ProjectFooter } from "@/components/project/ProjectFooter";
-import { ShotFrame } from "@/components/project/ShotFrame";
 import { TextcrewDiagram } from "@/components/project/TextcrewDiagram";
 
 const p = config.projects.textcrew;
@@ -101,12 +100,24 @@ export default function TextcrewPage() {
       />
 
       <div className="pb-12">
-        <ShotFrame
-          src="/Textcrew-Main.png"
-          alt="Textcrew landing page announcing the waitlist"
-          caption="The landing page at textcrew.in. The waitlist is open."
-          priority
-        />
+        <figure>
+          <div className="rounded-md overflow-hidden border border-[color:var(--border)] bg-bg-soft">
+            <video
+              src="/Textcrew/textcrew-demo.mp4"
+              poster="/Textcrew-Main.jpg"
+              controls
+              playsInline
+              preload="metadata"
+              width={1280}
+              height={720}
+              aria-label="Textcrew demo video"
+              className="w-full aspect-video"
+            />
+          </div>
+          <figcaption className="mt-2 text-[13px] text-muted">
+            Textcrew in 57 seconds: one text, the crew at work, your OK, and bringing your own AI.
+          </figcaption>
+        </figure>
       </div>
 
       <ProjectSection title="The problem">
@@ -213,12 +224,9 @@ export default function TextcrewPage() {
 
       <ProjectSection title="Status">
         <p>
-          <span className="font-medium text-fg">MVP built, pre-launch.</span>{" "}
-          The code is complete and tested, but it has not been deployed or
-          verified end to end: the containers, the real Hermes agent and the
-          outside services (WhatsApp, Composio, payments) have not run together
-          yet. There are no users or production traffic yet. The landing page
-          and waitlist are live at{" "}
+          <span className="font-medium text-fg">Live.</span>{" "}
+          Textcrew runs on the web app and Telegram, with a free plan and paid
+          plans. WhatsApp and iMessage are not live yet. See it at{" "}
           <a href={p.liveUrl} target="_blank" rel="noopener noreferrer" className="text-link">
             textcrew.in
           </a>
