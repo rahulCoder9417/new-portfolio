@@ -134,13 +134,13 @@ export const config = {
   seo: {
     title: "Rahul Kumar · AI Software Engineer",
     description:
-      "AI software engineer building scalable backends, machine learning systems and AI agents in TypeScript, Python, Go and Rust. Open to freelance work.",
+      "AI software engineer building scalable backends, machine learning systems, AI agents and LinkedIn scraping and automation in TypeScript, Python, Go and Rust. Open to freelance work.",
   },
 
   // ─── Hero ──────────────────────────────────────────────────
   hero: {
     intro:
-      "I build scalable backends, machine learning systems and AI agents, and the infrastructure they run on. Most of my work is in TypeScript, Python, Go and Rust.",
+      "I build scalable backends, machine learning systems, AI agents and LinkedIn scraping and automation, and the infrastructure they run on. Most of my work is in TypeScript, Python, Go and Rust.",
   },
 
   // ─── Navigation ────────────────────────────────────────────
@@ -158,6 +158,7 @@ export const config = {
     bio: [
       "I'm an AI software engineer. I work on three things: backends that hold up under load, the machine learning underneath AI features, and agents that do real work. I like owning a feature from the database schema to the UI, and the part I care about most is the backend: data models, queues, retries, and what happens when something fails.",
       "At InboxKit I build the Enrich platform: the Next.js frontend, services in Go and Node, and ClickHouse analytics over 300M+ records. Keeping it fast as the data grows means partitioned tables, Redis caching in front of heavy queries, and job queues with retries, backoff and rate limits. I write raw SQL when an ORM gets in the way.",
+      "For the last 10 months I've also worked on LinkedIn scraping and automation. I built a Puppeteer service that pulls any company's followers from Sales Navigator through a pool of managed accounts and proxies, with accounts allocated by remaining daily capacity, failover on rate limits and bans, and checkpoint resume. I also shipped two Chrome extensions for LinkedIn, Company Followers and Find Phone.",
       "On the ML side I work in Python: preparing data, training and evaluating models with PyTorch and scikit-learn, and using embeddings and vector search for retrieval. I want to know what the model is doing, not only which API to call.",
       "A lot of my recent work is agentic AI. I build on the Claude API and MCP: agents that call tools, ask before risky actions and remember the user, like Textcrew. I build RAG pipelines and multi-agent workflows with LangChain and LangGraph, and Claude Code is part of how I work every day: I break a design into phases and run parallel agents on separate git branches.",
       "For operations I run services in Docker and set up monitoring with Prometheus, Grafana, Loki and Tempo, so metrics, logs and traces are in one place.",
@@ -174,6 +175,7 @@ export const config = {
       { label: "Machine learning", items: ["PyTorch", "scikit-learn", "NumPy", "pandas", "Hugging Face Transformers", "Jupyter"] },
       { label: "AI & agents", items: ["Claude API", "Claude Code", "MCP", "LangChain", "LangGraph", "RAG", "Embeddings", "Qdrant", "Chroma", "LiteLLM"] },
       { label: "Data", items: ["PostgreSQL", "ClickHouse", "MongoDB", "Redis", "BullMQ", "Drizzle", "Prisma"] },
+      { label: "Scraping & automation", items: ["Puppeteer", "Chromium", "Xvfb", "LinkedIn Sales Navigator", "Chrome extensions (MV3)", "Plasmo", "Proxy pools"] },
       { label: "DevOps", items: ["Docker", "gVisor", "GitHub Actions", "Caddy", "AWS SES"] },
       { label: "Observability", items: ["Prometheus", "Grafana", "Loki", "Tempo"] },
     ],
@@ -207,15 +209,17 @@ export const config = {
       companyUrl: "https://inboxkit.com",
       location: "Remote",
       period: "Jan 2026 – Present",
-      description: "Building the Enrich platform end to end.",
+      description: "Building the Enrich platform end to end, including its LinkedIn scraping and automation.",
       highlights: [
         "Owned the Enrich platform end to end: frontend, backend, infrastructure and deployment, including the REST API behind the customer dashboard and an internal admin dashboard for monitoring and abuse detection.",
         "Built the customer UI in Next.js, Tailwind and shadcn/ui: dashboards, billing, analytics, and a shared component library with accessible, responsive layouts.",
         "Designed ClickHouse analytics over 300M+ records, using multi-tier Redis caching, query rewriting and partitioning to keep dashboard queries under a second at p95.",
+        "Built LinkedIn scraping with Puppeteer (Chromium on Xvfb) that pulls any company's followers from Sales Navigator through a pool of managed accounts and proxies: capacity-based allocation (20K per account a day), failover on rate limits and bans, 2FA logins, checkpoint resume, and admission control for jobs up to 300K followers.",
+        "Shipped two Chrome extensions for LinkedIn (Plasmo, React, MV3), Company Followers and Find Phone, with Fastify backends, OTP sign-up, free-tier quotas and encrypted profile capture.",
+        "Built Go and Node services on Redis-backed BullMQ queues with retries, backoff and rate-limited dispatch, and moved a 271M-document MongoDB usage collection to Redis counters to end a recurring outage.",
         "Added rate limiting, RBAC, signed sessions, strict input validation and audit logging across the platform.",
-        "Built services and automation pipelines (browser automation, transactional email, LinkedIn scraping) on Redis-backed BullMQ queues with retries, backoff and rate-limited dispatch.",
       ],
-      tags: ["Go", "Fiber", "Fastify", "Next.js", "ClickHouse", "Redis", "BullMQ", "Puppeteer", "AWS SES", "Docker", "MongoDB"],
+      tags: ["Go", "Fiber", "Fastify", "Next.js", "ClickHouse", "Redis", "BullMQ", "Puppeteer", "Chrome Extensions", "Plasmo", "AWS SES", "Docker", "MongoDB"],
       current: true,
     },
   ],
