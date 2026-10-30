@@ -175,7 +175,7 @@ export const config = {
       { label: "Machine learning", items: ["PyTorch", "scikit-learn", "NumPy", "pandas", "Hugging Face Transformers", "Jupyter"] },
       { label: "AI & agents", items: ["Claude API", "Claude Code", "MCP", "LangChain", "LangGraph", "RAG", "Embeddings", "Qdrant", "Chroma", "LiteLLM"] },
       { label: "Data", items: ["PostgreSQL", "ClickHouse", "MongoDB", "Redis", "BullMQ", "Drizzle", "Prisma"] },
-      { label: "Browser automation", items: ["Puppeteer", "Chromium", "Xvfb", "LinkedIn Sales Navigator", "Chrome extensions (MV3)", "Plasmo", "Proxy pools"] },
+      { label: "Browser automation", items: ["Puppeteer", "Chromium", "Xvfb", "Chrome extensions (MV3)", "Plasmo"] },
       { label: "DevOps", items: ["Docker", "gVisor", "GitHub Actions", "Caddy", "AWS SES"] },
       { label: "Observability", items: ["Prometheus", "Grafana", "Loki", "Tempo"] },
     ],
