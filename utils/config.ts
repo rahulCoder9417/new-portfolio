@@ -158,7 +158,7 @@ export const config = {
     bio: [
       "I'm an AI software engineer. I work on three things: backends that hold up under load, the machine learning underneath AI features, and agents that do real work. I like owning a feature from the database schema to the UI, and the part I care about most is the backend: data models, queues, retries, and what happens when something fails.",
       "At InboxKit I build the Enrich platform: the Next.js frontend, services in Go and Node, and ClickHouse analytics over 300M+ records. Keeping it fast as the data grows means partitioned tables, Redis caching in front of heavy queries, and job queues with retries, backoff and rate limits. I write raw SQL when an ORM gets in the way.",
-      "For the last 10 months I've also worked on LinkedIn automation. I built a Puppeteer service that collects company follower data from Sales Navigator across a managed account pool, with automatic failover and resumable jobs of up to 300K followers. I also shipped two Chrome extensions for LinkedIn, Company Followers and Find Phone.",
+      "For the last 10 months I've also worked on LinkedIn automation, using Puppeteer to collect company follower data. I also shipped two Chrome extensions for LinkedIn, Company Followers and Find Phone.",
       "On the ML side I work in Python: preparing data, training and evaluating models with PyTorch and scikit-learn, and using embeddings and vector search for retrieval. I want to know what the model is doing, not only which API to call.",
       "A lot of my recent work is agentic AI. I build on the Claude API and MCP: agents that call tools, ask before risky actions and remember the user, like Textcrew. I build RAG pipelines and multi-agent workflows with LangChain and LangGraph, and Claude Code is part of how I work every day: I break a design into phases and run parallel agents on separate git branches.",
       "For operations I run services in Docker and set up monitoring with Prometheus, Grafana, Loki and Tempo, so metrics, logs and traces are in one place.",
@@ -214,7 +214,7 @@ export const config = {
         "Owned the Enrich platform end to end: frontend, backend, infrastructure and deployment, including the REST API behind the customer dashboard and an internal admin dashboard for monitoring and abuse detection.",
         "Built the customer UI in Next.js, Tailwind and shadcn/ui: dashboards, billing, analytics, and a shared component library with accessible, responsive layouts.",
         "Designed ClickHouse analytics over 300M+ records, using multi-tier Redis caching, query rewriting and partitioning to keep dashboard queries under a second at p95.",
-        "Built LinkedIn automation with Puppeteer that collects company follower data from Sales Navigator across a managed account pool, with automatic failover and resumable jobs of up to 300K followers.",
+        "Built LinkedIn automation with Puppeteer that collects company follower data.",
         "Shipped two Chrome extensions for LinkedIn (Plasmo, React, MV3), Company Followers and Find Phone, with Fastify backends, OTP sign-up, free-tier quotas and encrypted profile capture.",
         "Built Go and Node services on Redis-backed BullMQ queues with retries, backoff and rate-limited dispatch, and moved a 271M-document MongoDB usage collection to Redis counters to end a recurring outage.",
         "Added rate limiting, RBAC, signed sessions, strict input validation and audit logging across the platform.",
